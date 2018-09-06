@@ -1,0 +1,127 @@
+/* overlay stuff start */
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: lightgrey;
+    
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 5%;
+    width: 100%;        
+}
+.overlay .closebtn {
+    font-size: 50px;
+}
+
+/* overlay stuff stop */
+
+
+/* overlay profile start */
+        .TCsidebar__offset-wrapper .widget {
+            margin-bottom: 15px
+        }
+
+        .TCsidebar__offset-wrapper .widgets .widget:first-child {
+            border-top: 0
+        }
+
+        @media (min-width:992px) {
+            .TCsidebar .TCsidebar__offset-wrapper {
+                position: relative;
+                margin-top: -120px !important;
+                padding: 15px
+            }
+        }
+
+
+
+
+        @media (min-width:768px) {
+            .hidden-md-up {
+                display: none !important
+            }
+        }
+
+
+        @media (max-width:767px) {
+            .hidden-sm-down {
+                display: none !important
+            }
+        }
+
+
+
+
+
+        .leadtext {
+            font-size: 1.5em;
+            font-weight: 400
+        }
+
+        .slogan {
+            font-size: 1.9em;
+            font-weight: 400
+        }
+
+        .widget {
+            margin-bottom: 30px;
+            border-top: 1px solid #ededeb;
+            padding-top: 15px
+        }
+
+        .widget .widget__title {
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 7.5px;
+            color: #6d6d6c
+        }
+
+
+        .widget--widget_meta ul {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+
+        .widget--widget_meta li {
+            display: inline-block
+        }
+
+
+        .widget--widget_meta li a {
+            display: inline-block;
+            font-size: .65em;
+            padding: .25em .5em;
+            background: #fecb00;
+            color: #005195;
+            margin-bottom: .25em;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            font-weight: 700;
+            border-radius: 2px;
+            text-decoration: none
+        }
+
+
+        .widget--widget_meta li a:hover {
+            background: #cba200
+        }
+
+
+        .jumbotron {
+            color: #005195;
+            background-color: #fecb00;
+        }
+
+/* overlay profile stop */
