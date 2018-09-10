@@ -467,8 +467,6 @@ function readSBNnetworkInfo(member) {
  */
 
 function memberTemplateCard(member) {
-    //<div class="urbacard" onclick="displayMemberOverlay('${member.id}')"> 
-    //${(member.member != "no") ?  : '<div class="card" >'}
     return `
         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 d-flex cardbox" onclick="displayMemberOverlay('${member.id}')">
             <div class="urbacard card card-body flex-fill card-accent-secondary mb-2">
@@ -482,9 +480,9 @@ function memberTemplateCard(member) {
                         <div class="collapse" id="collapse-${member.name}">
                             <p class="card-text">${member.description}</p>
                             <p class="card-member-tags">${member.member_tags}</p>
-                            <p class="card-segment">${member.segment}</p>
+                            <p class="card-member-tags">${member.segment}</p>
                             <p class="card-development-goals">${member.sustainable_development_goals}</p>
-                            <p class="card-insightly-tags">${member.insightly_tags}</p>
+                            <p class="card-member-tags">${member.insightly_tags}</p>
                         </div>
                         <div class="card-tags mt-2">
                             ${member.organization_type ? orgType(member.organization_type) : ""}
@@ -551,21 +549,24 @@ function searching() {
         
         if (text) {
             $('#searchReset').show('fast');
-            $targets.filter(':visible').each(function () {
+            $targets.each(function () {
                 var $target = $(this);
-                var $matches = 0;
+                var matches = 0;
                 // Search only in targeted element
                 $target.find('h2, h3, h4, h5, h6, p.card-text').each(function () {
                     if ($(this).text().toLowerCase().indexOf("" + text + "") !== -1) {
-                        $matches++;
+                        matches++;
                     }
                 });
-                if ($matches === 0) {
+
+                if (matches == 0) {
                     // $target.hide();
                     // fix for _display.scss -> .d-flex {display: flex !important;}
                     $target.attr('style','display:none !important')
                 }
             });
+
+            
 
             $overall = $targets.filter(':visible').length;
             if($overall === 0){
@@ -1321,7 +1322,7 @@ function displayMemberOverlay(member_id) {
 
                             <div class="widget__content-NODEFINE">
                                 <ul>
-                                    ${member.segment ? tags(member.segment, 'segment') : ""}
+                                    ${member.segment ? tags(member.segment, 'member-tags') : ""}
                                 </ul>    
                             </div>                                
                         </div>
@@ -1344,7 +1345,7 @@ function displayMemberOverlay(member_id) {
                             <h3 class="widget__title">Insightly Tags</h3>
                             <div class="widget__content-NODEFINE">
                                 <ul>
-                                    ${member.insightly_tags ? tags(member.insightly_tags, 'insightly-tags') : ""}
+                                    ${member.insightly_tags ? tags(member.insightly_tags, 'member-tags') : ""}
                                 </ul>    
                             </div>                                
                         </div>

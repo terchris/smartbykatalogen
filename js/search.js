@@ -6,35 +6,35 @@ $(document).on('click', '.tag-link', function(){
 
     var $targets = $('.cardbox'); // 
     $targets.show();
+
+   // $targets = $('#e8d52059-1139-4b58-8169-52314ba56d7a');
     //debugger;
+   // console.log($targets);
     if (tag) {
-        $targets.filter(':visible').each(function () {
+        $targets.each(function () {
             //debugger;
             var $target = $(this);
-            var $matches = 0;
-
+            var matches = 0;
             // Search only in targeted element
             // Search only by tags
-            //console.log($target.find('.card-'.statement));
             $target.find('.card-'+statement).each(function () {
-                //debugger;
+
                 var fields = $(this).text().split(',');
-                $.each(fields, function( index, value){
-                    if (value.toLowerCase() == tag) {
-                        $matches++;
+                
+                $.each(fields, function( index, value) {
+                    if (value.toLowerCase() == tag.toLowerCase()) {
+                        matches++;
                     }
                 });
 
-                if ($matches === 0) {
-                    // debugger;
-                    // $target.hide();
-                    // fix for _display.scss -> .d-flex {display: flex !important;}
-                    $target.attr('style','display:none !important')
-                }
-
             });
-            
 
+            if (matches == 0) {
+                //console.log('THE FUCK?'+matches);
+                // fix for _display.scss -> .d-flex {display: flex !important;}
+                $target.attr('style','display:none !important');
+            }
+    
         });
 
         $('#searchResponse')
@@ -42,6 +42,7 @@ $(document).on('click', '.tag-link', function(){
             .find('h4').text('')
                 .append('Searching result by tag <strong>'+tag+'</strong>:');
         $('#searchReset').show('fast');  
+
     }
 
     return false;
@@ -51,5 +52,6 @@ $(document).on('click', '#searchReset', function(){
     $('.cardbox').show('fast');
     $('#searchResponse').hide('fast');
     $('#searchReset').hide('fast');
+    $('.searchboxfield').val('');
     return false;
 });
