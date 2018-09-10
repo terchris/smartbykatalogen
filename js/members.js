@@ -566,8 +566,6 @@ function searching() {
                 }
             });
 
-            
-
             $overall = $targets.filter(':visible').length;
             if($overall === 0){
                 $('#searchResponse')
