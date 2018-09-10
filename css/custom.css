@@ -30,7 +30,7 @@ header .navbar {
 
 
  /*
- * Row with equal height columns
+ * Card styles section
  * --------------------------------------------------
  */
 .urbacard {
@@ -41,7 +41,41 @@ header .navbar {
     box-shadow: 5px 5px 10px #d2d2d2;
 }
 
-/* end of cards styling section*/
+.urbacard h5 {
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .urbacard {
+        text-align: center;
+        margin-bottom: 5px !important;
+        padding: 5px;
+    }
+
+    #app, #ui-container {
+        padding: 0 5px;
+    }
+
+    .urbacard img {
+        width: 75px;
+        margin-right: 0 !important;
+    }
+}
+@media (min-width: 1367px) {
+    .urbacard img {
+        width: 200px;
+    }
+}
+@media (min-width: 577px) and (max-width:1366px) {
+    .urbacard img {
+        width: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+
+}
+/* end of cards styles section*/
 
 
 
@@ -70,10 +104,6 @@ header .navbar {
  }
  
  @media (max-width: 576px) {
-    .urbacard {
-        text-align: center;
-    }
-
     #memberOverlay .display-4 {
         font-size: 1.5rem;
     }
