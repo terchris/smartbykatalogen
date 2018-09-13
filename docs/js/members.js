@@ -1231,7 +1231,7 @@ function displayMemberOverlay(member_id) {
 
     // tracking that we are displaying a member
     analytics.track('Display member', {
-        member_id: member_id,
+        ckan_name: member.name,
         display_name: member.display_name
       });
     document.getElementById("displayProfile").innerHTML = `
