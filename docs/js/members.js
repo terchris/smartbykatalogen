@@ -6,10 +6,10 @@
 function tags(tags, statement) {
 
 // tracking: that a tag is clicked
-//onclick='analytics.track("Tag click", {statement: statement,tag: member.tag.trim()});'
+//onclick="analytics.track('Tag click', {tag_family: statement,tag: member.tag.trim()});"
 
     return `
-    ${tags.map(tag => ` <li><a href="#" class="tag-link" onclick='analytics.track("Tag click", {statement: statement,tag: member.tag.trim()});' data-statement="${statement}">${tag.trim()}</a></li> `).join("")}
+    ${tags.map(tag => ` <li><a href="#" class="tag-link" onclick="analytics.track('Tag click', {tag_family: statement,tag: member.tag.trim()});" data-statement="${statement}">${tag.trim()}</a></li> `).join("")}
 `;
 }
 
