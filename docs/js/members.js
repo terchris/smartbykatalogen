@@ -1228,6 +1228,12 @@ function displayMemberCards() {
 function displayMemberOverlay(member_id) {
 
     var member = globalMembers.find(function (member) { return member.id === member_id; }); //get the member object
+
+    // tracking that we are displaying a member
+    analytics.track('Display member', {
+        member_id: member_id,
+        display_name: member.display_name
+      });
     document.getElementById("displayProfile").innerHTML = `
 
 <section>
