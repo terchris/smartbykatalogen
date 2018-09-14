@@ -1281,9 +1281,6 @@ function displayMemberOverlay(member_id) {
                         <div>
                             <p class="leadtext">${member.description} </p>
                         </div>
-                        <div id="SBNnetworkInfo_resource_id">
-                            ${readSBNnetworkInfo(member)}    
-                        </div>
                     </main>
                 </div>
                 <div class="row">
@@ -1358,7 +1355,13 @@ function displayMemberOverlay(member_id) {
                             </div>                                
                         </div>
                     </main>
-                    </div>
+
+                    <main class="col-sm-12 col-lg-12" >
+                        <div id="SBNnetworkInfo_resource_id">
+                                ${readSBNnetworkInfo(member)}    
+                            </div>
+                        </div>
+                    </main>
                 </div>
             </div>
 
