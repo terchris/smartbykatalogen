@@ -1,0 +1,115 @@
+/* common styles */
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.page-header {
+    padding: 50px 0;
+}
+
+header {
+    margin-bottom: -50px;
+}
+
+header .navbar-brand {
+    width: auto;
+    height: auto;
+    padding-right: 30px;
+}
+
+header .navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #c8ced3;
+}
+/* end of common styles */
+
+
+
+ /*
+ * Card styles section
+ * --------------------------------------------------
+ */
+.urbacard {
+    cursor: pointer;
+ }
+
+.urbacard:hover {
+    box-shadow: 5px 5px 10px #d2d2d2;
+}
+
+.urbacard h5 {
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .urbacard {
+        text-align: center;
+        margin-bottom: 5px !important;
+        padding: 5px;
+    }
+
+    #app, #ui-container {
+        padding: 0 5px;
+    }
+
+    .urbacard img {
+        width: 75px;
+        margin-right: 0 !important;
+    }
+}
+@media (min-width: 1367px) {
+    .urbacard img {
+        width: 200px;
+    }
+}
+@media (min-width: 577px) and (max-width:1366px) {
+    .urbacard img {
+        width: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+
+}
+/* end of cards styles section*/
+
+
+
+ /* modal section */
+ .overlay {
+    background-color: rgba(31, 30, 30, 0.6);
+    z-index: 10000;
+ }
+
+ .overlay-content {
+    top: 0;
+ }
+
+ #memberOverlay .closebtn {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+ }
+
+ #memberOverlay .closebtn:focus {
+    outline: 0;
+ }
+
+ #memberOverlay .modal-main-section {
+     padding-top: 15px;
+ }
+ 
+ @media (max-width: 576px) {
+    #memberOverlay .display-4 {
+        font-size: 1.5rem;
+    }
+
+    #memberOverlay .slogan {
+        font-size: 1.2rem;
+    }
+ }
+ /* end of modal section */
