@@ -17,6 +17,19 @@
       </script>
 
 
+<!-- https creats problems - so force http -->
+<script>
+    if (window.location.protocol == "https:") {
+      console.log("You are using https ")
+      console.log("Reloading in http")
+      window.location = document.URL.replace("https://", "http://");
+    }
+
+    if (window.location.protocol == "http:") {
+      console.log("You are using http. that just works.")
+    }
+</script>
+
 
     <!-- Squarespace header copy start. Paste to Settings - Advanced - PAGE HEADER CODE INJECTION-->
     <!-- Main styles for this application -->
