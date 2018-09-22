@@ -1238,6 +1238,16 @@ function displayMemberOverlay(member_id) {
         ckan_name: member.name,
         display_name: member.display_name
       });
+    // change page title to the member beeing displayed
+    var memberPageTitle = pageTitle + ": " + member.display_name;
+    document.title = memberPageTitle
+    var memberURL = "?name="  + member.name;
+    	
+    window.history.pushState('', memberPageTitle, memberURL);
+
+    // TODO: change the og attributes $('meta[name="og:title"]').attr('content', pageTitle + ": " + member.display_name);
+
+
     document.getElementById("displayProfile").innerHTML = `
 
 <section>
@@ -1245,8 +1255,8 @@ function displayMemberOverlay(member_id) {
         <div class="row">
             <div class="col">
                 <div class="bg-white text-center">
-                            <button type="button" class="close closebtn"  data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>            
+                            <button type="button" class="close closebtn"  data-dismiss="modal" aria-label="Close" onclick="closeMemberOverlay('${member.name}','${member.display_name}');">
+                                <span aria-hidden="true">&times;</span>                                            
                             </button>
                         <img src="${member.image_display_url}" class="img-fluid" onerror="this.onerror=null;this.src='${organizationImageDefaut}';" alt="${member.display_name}">
                 </div>
@@ -1379,9 +1389,24 @@ function displayMemberOverlay(member_id) {
 }
 
 
+/**** closeMemberOverlay
+ * called when member is closed
+ * 
+ */
+function closeMemberOverlay(name,display_name) {
+    // This is not needed $('#memberOverlay').modal('hide');
+    
+    window.history.back();
 
-function closeMemberOverlay() {
-    $('#memberOverlay').modal('hide');
+    document.title = pageTitle ; // change page title back to pageTitle
+    
+    // tracking that we are closing a member
+    analytics.track('Close member', {
+        ckan_name: name,
+        display_name: display_name
+      });
+
+
 }
 
 
@@ -1649,6 +1674,9 @@ const globalMyLog = false;
 
 var globalSBNnetworkInfo; // First time we access SBN articles we read all of them and store them here
 var globalMembers = []; // we need to access the member array after the cards are rendered
+
+const pageTitle = "Smartbykatalogen";   // page title for web page
+document.title = pageTitle; //set it
 
 
 
