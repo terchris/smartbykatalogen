@@ -1243,7 +1243,7 @@ function displayMemberOverlay(member_id) {
     document.title = memberPageTitle
     var memberURL = "?name="  + member.name;
     	
-    window.history.pushState('', memberPageTitle, memberURL);
+    window.history.pushState('', memberPageTitle, memberURL); //TODO: handle back button
 
     // TODO: change the og attributes $('meta[name="og:title"]').attr('content', pageTitle + ": " + member.display_name);
 
@@ -1472,12 +1472,14 @@ function orgUpdateField(org_id, fieldName, fieldValue) {
 
 function statistics() {
 
+
+
     var virksomhetChart = new Chart($('#canvas-virksomhet'), {
-        type: 'bar',
+        type: 'pie',
         data: {
-            labels: ['Private', 'Public', 'Civil Society', 'Research', 'Startup'],
-            datasets: [{
-                data: [86, 24, 8, 5, 2],
+            labels: countedOrgTypes.orgtype,
+            datasets: [{               
+                data: countedOrgTypes.count,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
                     'rgba(54, 162, 235, 0.5)',
@@ -1499,7 +1501,7 @@ function statistics() {
         options: {
             responsive: true,
             legend: {
-                display: false
+                position: 'right'
             }
         }
     });
@@ -1652,6 +1654,88 @@ function loginStatus() {
 
 
 
+/*** countDistinctSegmentTypes
+ * 
+ * 
+ */
+function countDistinctSegmentTypes(){
+
+
+    countedSegmentTypes = {segmenttype: [], count: [] } ; //reset before counting
+
+}
+
+/*** countDistinctOrgTypes
+ *  globalMembers
+ * 
+ * 
+*/
+function countDistinctOrgTypes(){
+
+/*   ramblings for testing
+
+const counts = Object.create(null);
+    buttons.forEach(btn => {
+      counts[btn] = counts[btn] ? counts[btn] + 1 : 1;
+    });
+
+const seen = Object.create(null);
+buttons.forEach(btn => {
+  seen[btn] = true;
+});
+
+
+    var distinctOrgTypes = Object.create(null);
+    orgTypes.forEach(x => {
+        distinctOrgTypes[x]  = true;
+    });
+
+
+
+
+
+*/
+    const allOrgTypes = globalMembers.map(x => x.organization_type); // create an array of all organization_type
+    var countedOrgTypesKeypair = Object.create(null);
+    
+    countedOrgTypes = {orgtype: [], count: [] } ; //reset the array 
+    
+
+
+    // counts the different org types- but make it in a key pair array
+    allOrgTypes.forEach(org => {
+        countedOrgTypesKeypair[org] = countedOrgTypesKeypair[org] ? countedOrgTypesKeypair[org] + 1 : 1;
+    });
+
+    // transform the key pair to a structure that can be used by chart.js
+
+    
+
+    // For each item in your object
+    for (var key in countedOrgTypesKeypair) {
+        countedOrgTypes.orgtype.push(key);
+        // ... and the value as a new data
+        countedOrgTypes.count.push(countedOrgTypesKeypair[key]);
+    }
+
+
+
+
+
+/* detteer feil - men kan brukes til annet     
+    //var services = ['weibo', 'facebook', 'twitter', 'xing'];
+    distinctOrgTypes = ['private', 'startup', 'public', 'research', 'civil_society'];
+    var result = _.map(distinctOrgTypes, function(service){ 
+         var length = _.reject(globalMembers, function(el){
+               return (el.id.indexOf(service) < 0); 
+         }).length; 
+         return {id: service, count: length};
+    });
+ **/
+}
+
+
+
 
 
 
@@ -1679,6 +1763,8 @@ const pageTitle = "Smartbykatalogen";   // page title for web page
 document.title = pageTitle; //set it
 
 
+var countedOrgTypes = {orgtype: [], count: [] } ; // This is where we place each distinct organization_type and the count for each organization_type 
+var countedSegmentTypes = {segmenttype: [], count: [] } ; // This is where we place each distinct organization_type and the count for each organization_type 
 
 /**
  * This is the starting function. It reads the organisations from CKAN 
@@ -1700,6 +1786,7 @@ function loadOrganizationsFromCKAN() {
                 //globalMembers = JSON.parse(JSON.stringify(result.result.records));     
                 globalMembers = tidyOrganizations(result.result); // add and remove stuff
                 displayMemberCards(); // display the members fetched into globalMembers array                    
+                countDistinctOrgTypes(); // Count the number of different org types
             }
 
         });
@@ -1718,7 +1805,9 @@ function loadOrganizationsFromCKAN() {
     getMembersDummyData();
     displayMemberCards();
     loginStatus();
+    countDistinctOrgTypes(); // Count the number of different org types
     statistics();
+    
 
 
 
@@ -1745,6 +1834,8 @@ function loadOrganizationsFromCKAN2() {
             globalMembers = tidyOrganizations(response.data.result); // add and remove stuff
             console.log(JSON.stringify(globalMembers));
             displayMemberCards(); // display the members fetched into globalMembers array                    
+            countDistinctOrgTypes(); // Count the number of different org types
+            statistics(); //Display updated statistics
 
         })
         .catch(function (error) {
@@ -1764,7 +1855,9 @@ function loadOrganizationsFromCKAN2() {
     getMembersDummyData();
     displayMemberCards();
     loginStatus();
+    countDistinctOrgTypes(); // Count the number of different org types
     statistics();
+    
 
 
 
