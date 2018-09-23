@@ -884,291 +884,323 @@ function getMembersDummyData() {
         {
             "package_count": 0,
             "num_followers": 0,
-            "contact_name": "",
-            "id": "ee3a213d-5836-4f72-ae77-8ef5d4472503",
-            "display_name": "abb",
+            "contact_name": "Tony Olsen",
+            "id": "ab0394bf-07a3-43ea-82f4-0eeb3d2e6a8f",
+            "display_name": "ABAX",
             "approval_status": "approved",
-            "title": "",
-            "member": "no",
-            "state": "active",
+            "sustainable_development_goals": [
+                "8",
+                "9",
+                "11",
+                "12"
+            ],
             "is_organization": true,
-            "type": "organization",
-            "website": "http://www.abb.no",
-            "description": " El-produkter, roboter og drivsystemer, industriell automatisering og kraftnett.",
-            "main_adddress": "",
-            "slogan": "Industriell automatisering",
-            "name": "abb",
-            "created": "2018-04-17T22:57:13.282926",
-            "organization_type": "private",
-            "employees": "",
-            "image_display_url": "http://bucket.urbalurba.com/logo/abb.jpg",
-            "insightly_tags": "Hurtigruten2018",
-            "image_url": "http://bucket.urbalurba.com/logo/abb.jpg",
-            "revision_id": "83b01469-3f20-412c-9f36-4e88db5e57be",
-            "insightly_id": "107445495",
-            "users": [
-                {
-                    "email_hash": "590c06df50b74f292f2258d1e64f323e",
-                    "about": null,
-                    "capacity": "admin",
-                    "name": "urbalurbaadmin",
-                    "created": "2018-04-14T00:11:07.970227",
-                    "openid": null,
-                    "sysadmin": true,
-                    "activity_streams_email_notifications": false,
-                    "state": "active",
-                    "number_of_edits": 330,
-                    "display_name": "urbalurbaadmin",
-                    "fullname": null,
-                    "id": "55f915f3-510e-4ab6-bdfb-fd8f0e6437a9",
-                    "number_created_packages": 3,
-                    "userProfileURL": "http://data.urbalurba.com/user/urbalurbaadmin",
-                    "profilepictureurl": "",
-                    "aboutdisplay": ""
-                }
-            ]
-        },
-        {
-            "package_count": 0,
-            "num_followers": 0,
-            "contact_name": "",
-            "id": "a27f3c27-11ef-4f04-921f-629fb58a9799",
-            "display_name": "ABAX AS",
-            "approval_status": "approved",
-            "title": "ABAX AS",
-            "member": "no",
+            "member": "yes",
             "state": "active",
-            "is_organization": true,
             "type": "organization",
             "website": "https://www.abax.no/",
-            "description": "Elektronisk kjørebok, utstyrskontroll og digital prosjektstyring",
-            "main_adddress": "",
-            "slogan": "Elektronisk kjørebok",
-            "name": "abax-as",
-            "created": "2018-04-17T22:41:34.215029",
+            "description": "Teknologi forandrer måten verden fungerer på, og dette påvirker alle deler av arbeidslivet. For ABAX betyr det at vi må tilby smarte løsninger som gir deg adgang til hele arbeidsplassen din, uavhengig av om du befinner deg i bilen, på kontoret eller ute i felt. Derfor er vår Mission Statement \"Solutions Provider for The Connected Workspace\".\n\nVåre tjenester hjelper kundene å holde seg oppdaterte, bli mer effektive og spare penger ved å tilby Internet of Things-løsninger (IoT) i verdensklasse. ABAX er det raskest voksende telematikkselskapet i Europa og fokuserer på å levere IoT-løsninger som maksimerer verdien for våre kunder. \n\nVed å tilby mobilitet, fleksibilitet og brukervennlighet tror ABAX på et sømløst integrert IoT-domene som løser hverdagsproblemer for vår målgruppe. Alle aspekter av våre tjenester kommuniserer med hverandre for å kunne tilby maksimal fleksibilitet og en ledende løsning innen kommunikasjonsnettverk og nettverkstjenester.\n\nBusinessmodellen vår er basert på en SaaS-løsning (Software as a Service). Vi har bygd en fullt integrert softwareplatform som kan tilpasses fremtidens innovative tjenester. Vår hardware, software og våre produkter er lette å installere og bruke. \n\nHos ABAX jobber over 400 ansatte, fordelt på salg, kundeservice, markedsføring, administrasjon, kvalitet og utvikling. Vi har kontorer i Norge, Sverige, Danmark, Finland, Nederland, Polen, England, Tyskland og Kina. Hovedkontoret ligger i Larvik, Norge.",
+            "main_adddress": "Hammergata 24, 3264 Larvik, Norway",
+            "phone": "22 22 22 99",
+            "contact_email": "To@abax.no",
+            "contact_mobile": "46842441",
+            "organization_number": "993098736",
+            "contact_title": "Salgsansvarlig kommune",
+            "segment": [
+                "mobilitet",
+                "telematikk",
+                "digitalisering"
+            ],
+            "member_tags": [
+                "iot",
+                "mobilitet",
+                "telematikk",
+                "kjørebok",
+                "flåtestyring",
+                "worker",
+                "smartere arbeidsdag"
+            ],
+            "slogan": "The difference is ABAX",
+            "name": "abax",
+            "created": "2018-09-10T20:26:01.953614",
             "organization_type": "private",
-            "employees": "",
             "image_display_url": "http://bucket.urbalurba.com/logo/abax.jpg",
-            "insightly_tags": "Hurtigruten2018",
+            "insightly_tags": [
+                "=sbnmedlemsvirksomhet",
+                "ckan-export",
+                "hurtigruten2018",
+                "ss_privat"
+            ],
             "image_url": "http://bucket.urbalurba.com/logo/abax.jpg",
-            "revision_id": "a69fdd01-a464-4093-96e2-1737772eea7b",
+            "title": "ABAX",
+            "revision_id": "03fb8c48-25f5-4a7c-a338-448c5b0eda28",
+            "employee_resource_id": "",
             "insightly_id": "98965342",
-            "users": [
-                {
-                    "email_hash": "590c06df50b74f292f2258d1e64f323e",
-                    "about": null,
-                    "capacity": "admin",
-                    "name": "urbalurbaadmin",
-                    "created": "2018-04-14T00:11:07.970227",
-                    "openid": null,
-                    "sysadmin": true,
-                    "activity_streams_email_notifications": false,
-                    "state": "active",
-                    "number_of_edits": 330,
-                    "display_name": "urbalurbaadmin",
-                    "fullname": null,
-                    "id": "55f915f3-510e-4ab6-bdfb-fd8f0e6437a9",
-                    "number_created_packages": 3,
-                    "userProfileURL": "http://data.urbalurba.com/user/urbalurbaadmin",
-                    "profilepictureurl": "",
-                    "aboutdisplay": ""
-                }
-            ]
+            "users": []
         },
         {
-            "package_count": 2,
+            "package_count": 1,
             "num_followers": 0,
             "contact_name": "Dan Vigeland",
-            "id": "5b60c765-ad61-4e9e-876d-5a19653a846b",
-            "display_name": "Acando:)",
+            "id": "e8d52059-1139-4b58-8169-52314ba56d7a",
+            "display_name": "Acando",
             "approval_status": "approved",
+            "sustainable_development_goals": [
+                "3",
+                "11",
+                "17"
+            ],
             "is_organization": true,
             "member": "yes",
             "state": "active",
             "type": "organization",
             "website": "https://www.acando.no/",
-            "description": "Acando er et konsulentselskap som jobber med digitale transformasjoner i offentlig og private virksomheter. Teknologi er en sentral driver til forandring, men det er brukerens evne og ønske om å ta teknologien i bruk som skaper verdi. Med teknisk spisskompetanse og inngående innsikt i brukeratferd og forretningsutvikling drevet av digitalisering, skaper vi idéer, løsninger og mobiliserer organisasjoner til forandring.\r\nEt av våre satsningsområder er Smart City der Intelligente Transportsystemer (ITS) og selvkjørende minibusser i alminnelig trafikkmiljø, er en del av satsningen.",
-            "main_adddress": "Tordenskioldsgate 8-10, 0160 Oslo",
-            "phone": "93001000",
+            "description": "Acando er et konsulentselskap som jobber med digitale transformasjoner i offentlig og private virksomheter. Teknologi er en sentral driver til forandring, men det er brukerens evne og ønske om å ta teknologien i bruk som skaper verdi. Med teknisk spisskompetanse og inngående innsikt i brukeratferd og forretningsutvikling drevet av digitalisering, skaper vi idéer, løsninger og mobiliserer organisasjoner til forandring. Et av våre satsningsområder er Smart City der Intelligente Transportsystemer (ITS) og selvkjørende minibusser i alminnelig trafikkmiljø, er en del av satsningen..",
+            "main_adddress": "Tordenskioldsgate 8-10, 0160 Oslo, Norway",
+            "phone": "930 01 000",
+            "contact_email": "dan.vigeland@acando.no",
+            "contact_mobile": "93248286",
             "organization_number": "979191138",
+            "contact_title": "Director Smart City",
+            "segment": [
+                "mobilitet",
+                "robotics"
+            ],
+            "member_tags": [
+                "digital strategy",
+                "iot",
+                "data analytics",
+                "autonomous"
+            ],
             "slogan": "Digitalt konsulentselskap",
             "name": "acando",
-            "created": "2018-04-16T19:18:33.457075",
+            "created": "2018-06-25T07:59:09.815586",
             "organization_type": "private",
-            "employees": "2dfb69b8-a9cc-47f2-a894-803001703737",
             "image_display_url": "http://bucket.urbalurba.com/logo/acando.jpg",
-            "insightly_tags": "",
-            "tags": "Selvkjørende, autonom, smart transport, smart mobility, buss,banan",
+            "insightly_tags": [
+                "+oslo",
+                "=sbnmedlemsvirksomhet",
+                "ckan-export",
+                "digitalstrategi",
+                "hurtigruten2018",
+                "-iot",
+                "it",
+                "konsulent",
+                "smartcity",
+                "ss_innovation",
+                ".dataanalytics",
+                ".mobility",
+                ".robotics",
+                "ss_privat"
+            ],
             "image_url": "http://bucket.urbalurba.com/logo/acando.jpg",
             "title": "Acando",
-            "revision_id": "284d8271-bdeb-4173-9169-acf505ca856c",
+            "revision_id": "72e579d4-6b7d-4904-a6cf-83100baefc22",
+            "employee_resource_id": "dddd5155-24ea-4604-a41d-413494aaeb23",
             "insightly_id": "95288967",
-            "users": [
-                {
-                    "email_hash": "590c06df50b74f292f2258d1e64f323e",
-                    "about": null,
-                    "capacity": "admin",
-                    "name": "urbalurbaadmin",
-                    "created": "2018-04-14T00:11:07.970227",
-                    "openid": null,
-                    "sysadmin": true,
-                    "activity_streams_email_notifications": false,
-                    "state": "active",
-                    "number_of_edits": 330,
-                    "display_name": "urbalurbaadmin",
-                    "fullname": null,
-                    "id": "55f915f3-510e-4ab6-bdfb-fd8f0e6437a9",
-                    "number_created_packages": 3,
-                    "userProfileURL": "http://data.urbalurba.com/user/urbalurbaadmin",
-                    "profilepictureurl": "",
-                    "aboutdisplay": ""
-                }
-            ]
+            "users": []
         },
         {
-            "website": "http://www.afconsult.com/",
-            "display_name": "ÅF Lighting Norge",
-            "description": "Rådgivning, offentlig belysning",
-            "image_display_url": "http://bucket.urbalurba.com/logo/af-logo-tag-black.jpg",
-            "organization_type": "startup",
-            "created": "2018-04-18T01:22:38.620441",
-            "name": "af-lighting-norge",
-            "member": "yes",
+            "package_count": 0,
+            "num_followers": 0,
+            "contact_name": "Kaja Goplen",
+            "id": "adf6476e-cfa7-41ad-96e2-cd3d6cb12c3b",
+            "display_name": "Advokatfirma Recurso",
+            "approval_status": "approved",
+            "sustainable_development_goals": "",
             "is_organization": true,
+            "member": "yes",
             "state": "active",
+            "type": "organization",
+            "website": "http://www.recurso.no/",
+            "description": "Juridisk rådgivning til bedrifter og privatpersoner. Spesialfelt arbeidsrett og megling, samt bistand i fbm bedriftsoppstart og utviklingsprosesser.\nRecurso AS yter effektiv, løsningsorientert og personlig rådgivning og bistand til sine klienter og samarbeidspartnere. \n\nVår visjon er at ressurs er elementært og nødvendig i alt som skal gjøres, og ressurser er til for å brukes. Vi arbeider fremoverlent, for å hjelpe våre kunder til å oppnå gode og konstruktive resultater. Du/dere skal oppleve at vårt arbeid utføres med gjensidig tillit og at vi jobber ut ifra et helhetlig perspektiv.",
+            "main_adddress": "Rødbergveien 2b, 0591 Oslo, Norway",
+            "phone": "416 95 522",
+            "contact_email": "kontakt@recurso.no",
+            "contact_mobile": "416 95 522",
+            "organization_number": "91743534",
+            "contact_title": "Advokat - Daglig leder",
+            "segment": [
+                "advokater og juridiske tjenester"
+            ],
+            "member_tags": [
+                "rårdgiving"
+            ],
+            "slogan": "Juridisk rådgivning til bedrifter og privatpersoner.",
+            "name": "recurso",
+            "created": "2018-06-25T07:59:23.463640",
+            "organization_type": "private",
+            "image_display_url": "http://bucket.urbalurba.com/logo/recruso.jpg",
+            "insightly_tags": [
+                "+oslo",
+                "=sbnmedlemsvirksomhet",
+                "ss_privat",
+                "ckan-export"
+            ],
+            "image_url": "http://bucket.urbalurba.com/logo/recruso.jpg",
+            "title": "Advokatfirma Recurso",
+            "revision_id": "6b3873cc-6453-4f54-9fcb-c7fcafad2a97",
+            "employee_resource_id": "",
+            "insightly_id": "120770018",
+            "users": []
+        },
+        {
+            "package_count": 0,
+            "num_followers": 0,
+            "contact_name": "Øystein Johansen",
+            "id": "92ffaf0e-58f1-4722-9697-1b46d04d1945",
+            "display_name": "ÅF Lighting Norge",
+            "approval_status": "approved",
+            "sustainable_development_goals": "",
+            "is_organization": true,
+            "member": "yes",
+            "state": "active",
+            "type": "organization",
+            "website": "http://www.afconsult.com/",
+            "description": "Rådgivning, offentlig belysning",
+            "main_adddress": "Lilleakerveien 8, 0283 Oslo, Norway",
+            "phone": "24101010",
+            "contact_email": "Oystein.Johansen@afconsult.com",
+            "contact_mobile": "992 13 064",
+            "organization_number": "991211845",
+            "contact_title": "Office Manager",
+            "segment": [
+                "automotive and vehicles",
+                "energy",
+                "life science",
+                "infrastructure",
+                "telecom",
+                "real estate",
+                "process industry"
+            ],
+            "member_tags": [
+                "engineering and consulting company"
+            ],
+            "slogan": "Rådgivning, offentlig belysning",
+            "name": "af-lighting-norge",
+            "created": "2018-06-25T07:59:17.332160",
+            "organization_type": "private",
+            "image_display_url": "http://bucket.urbalurba.com/logo/af-logo-tag-black.jpg",
+            "insightly_tags": [
+                "+oslo",
+                "=sbnmedlemsvirksomhet",
+                "ckan-export",
+                "smartcity",
+                "ss_privat",
+                "sustainability"
+            ],
             "image_url": "http://bucket.urbalurba.com/logo/af-logo-tag-black.jpg",
             "title": "ÅF Lighting Norge",
-            "type": "organization",
-            "package_count": 0,
-            "slogan": "Rådgivning, offentlig belysning",
-            "revision_id": "7b021d2e-5b70-4d16-91aa-9bb6ca7832f4",
+            "revision_id": "0a13b677-28ae-4419-81d6-e6a149f660ba",
+            "employee_resource_id": "",
             "insightly_id": "114887093",
-            "num_followers": 0,
-            "id": "a5e05ae1-dbe8-4579-95ec-9aec292dcce3",
-            "approval_status": "approved",
-            "users": [
-                {
-                    "email_hash": "590c06df50b74f292f2258d1e64f323e",
-                    "about": null,
-                    "capacity": "admin",
-                    "name": "urbalurbaadmin",
-                    "created": "2018-04-14T00:11:07.970227",
-                    "openid": null,
-                    "sysadmin": true,
-                    "activity_streams_email_notifications": false,
-                    "state": "active",
-                    "number_of_edits": 330,
-                    "display_name": "urbalurbaadmin",
-                    "fullname": null,
-                    "id": "55f915f3-510e-4ab6-bdfb-fd8f0e6437a9",
-                    "number_created_packages": 3,
-                    "userProfileURL": "http://data.urbalurba.com/user/urbalurbaadmin",
-                    "profilepictureurl": "",
-                    "aboutdisplay": ""
-                }
-            ]
+            "users": []
         },
         {
             "package_count": 0,
             "num_followers": 0,
             "contact_name": "Gjermund Lanestedt",
-            "id": "ba175754-a1b9-4e9f-9e31-f7f7268baa2b",
+            "id": "91714600-d5be-403b-bed9-edb35f500c37",
             "display_name": "Agenda Kaupang",
             "approval_status": "approved",
+            "sustainable_development_goals": "",
             "is_organization": true,
             "member": "yes",
             "state": "active",
             "type": "organization",
             "website": "https://www.agendakaupang.no/",
             "description": "Agenda Kaupang er et norsk konsulentselskap. Vi tilbyr analyse, utredning og rådgiving innen områdene ledelse, styring, økonomi og organisasjonsutvikling. Agenda Kaupangs kunder er primært i offentlig sektor, samt blant bedrifter og organisasjoner i arbeidslivet.",
-            "main_adddress": "Holtet 45, 1368 Stabekk",
+            "main_adddress": "Holtet 45 , 1368 Stabekk, Norway",
             "phone": "95195648",
+            "contact_email": "gjermund.lanestedt@agendakaupang.no",
+            "contact_mobile": "95195648",
             "organization_number": "968938525",
+            "contact_title": "Seniorrådgiver",
+            "segment": "",
+            "member_tags": "",
             "slogan": "Rådgivere for offentlig sektor",
             "name": "agenda-kaupang",
-            "created": "2018-04-16T19:30:53.207288",
+            "created": "2018-06-25T07:59:03.961605",
             "organization_type": "private",
-            "employees": "",
             "image_display_url": "http://bucket.urbalurba.com/logo/agenda.jpg",
-            "insightly_tags": "",
+            "insightly_tags": [
+                "=sbnmedlemsvirksomhet",
+                "ckan-export",
+                "konsulent",
+                "ss_privat",
+                "smartcity"
+            ],
             "image_url": "http://bucket.urbalurba.com/logo/agenda.jpg",
             "title": "Agenda Kaupang",
-            "revision_id": "1dc171bd-cbf1-4312-b31c-d3f706e49820",
+            "revision_id": "5bfba88f-0dc7-41d4-bc05-83fb04a2b98d",
+            "employee_resource_id": "",
             "insightly_id": "90622205",
-            "users": [
-                {
-                    "email_hash": "590c06df50b74f292f2258d1e64f323e",
-                    "about": null,
-                    "capacity": "admin",
-                    "name": "urbalurbaadmin",
-                    "created": "2018-04-14T00:11:07.970227",
-                    "openid": null,
-                    "sysadmin": true,
-                    "activity_streams_email_notifications": false,
-                    "state": "active",
-                    "number_of_edits": 330,
-                    "display_name": "urbalurbaadmin",
-                    "fullname": null,
-                    "id": "55f915f3-510e-4ab6-bdfb-fd8f0e6437a9",
-                    "number_created_packages": 3,
-                    "userProfileURL": "http://data.urbalurba.com/user/urbalurbaadmin",
-                    "profilepictureurl": "",
-                    "aboutdisplay": ""
-                }
-            ]
+            "users": []
         },
         {
             "package_count": 0,
             "num_followers": 0,
-            "contact_name": "",
-            "id": "0c6fc289-a443-4e32-9cab-6b59830a8076",
+            "contact_name": "Harald Jellum",
+            "id": "486f9c87-d814-4c29-8fa2-5c97ca96d675",
             "display_name": "AISPOT",
             "approval_status": "approved",
-            "title": "AISPOT",
+            "sustainable_development_goals": "",
+            "is_organization": true,
             "member": "yes",
             "state": "active",
-            "is_organization": true,
             "type": "organization",
             "website": "https://aispot.no/",
             "description": "Aispot helps retail and destinations engage customers and increase loyalty. Enabling the concept of Future Shopping. Clients Simply connect to – and publish to their customers through a shared mobile platform utilizing beacons, QR, club, mobile Wallet and a range of ready-made services",
-            "main_adddress": "",
+            "main_adddress": "Pier X Bryggegata 3, 0250 Oslo, Norway",
+            "phone": "90020538",
+            "contact_email": "harald@aispot.no",
+            "contact_mobile": " 91543432",
+            "organization_number": "91593967",
+            "contact_title": "Gründer",
+            "segment": [
+                "tourism",
+                "mobile wallet",
+                "mobile assistant",
+                "digital services",
+                "innovation",
+                "e-commerce",
+                "iot"
+            ],
+            "member_tags": [
+                "tourism",
+                "mobile wallet",
+                "mobile assistant",
+                "digital services",
+                "innovation",
+                "e-commerce",
+                "iot"
+            ],
             "slogan": "IoT og app for varehandel og reiseliv",
             "name": "aispot",
-            "created": "2018-04-16T20:19:21.829200",
+            "created": "2018-06-25T07:59:23.363859",
             "organization_type": "private",
-            "employees": "",
             "image_display_url": "http://bucket.urbalurba.com/logo/aispot.jpg",
-            "insightly_tags": "",
+            "insightly_tags": [
+                "=sbnmedlemsvirksomhet",
+                "ckan-export",
+                "ss_privat",
+                "+oslo",
+                "-iot",
+                "smartcity"
+            ],
             "image_url": "http://bucket.urbalurba.com/logo/aispot.jpg",
-            "revision_id": "08a4b0cf-7f13-4398-82ad-86cf5ec23ecc",
+            "title": "AISPOT",
+            "revision_id": "9b20053e-17db-4c39-b4b8-8766c05ed0e3",
+            "employee_resource_id": "",
             "insightly_id": "120108147",
-            "users": [
-                {
-                    "email_hash": "590c06df50b74f292f2258d1e64f323e",
-                    "about": null,
-                    "capacity": "admin",
-                    "name": "urbalurbaadmin",
-                    "created": "2018-04-14T00:11:07.970227",
-                    "openid": null,
-                    "sysadmin": true,
-                    "activity_streams_email_notifications": false,
-                    "state": "active",
-                    "number_of_edits": 330,
-                    "display_name": "urbalurbaadmin",
-                    "fullname": null,
-                    "id": "55f915f3-510e-4ab6-bdfb-fd8f0e6437a9",
-                    "number_created_packages": 3,
-                    "userProfileURL": "http://data.urbalurba.com/user/urbalurbaadmin",
-                    "profilepictureurl": "",
-                    "aboutdisplay": ""
-                }
-            ]
+            "users": []
         }
-
     ];
 
 
+/*
 
+*/
 
 
 }
@@ -1477,7 +1509,7 @@ function statistics() {
     var virksomhetChart = new Chart($('#canvas-virksomhet'), {
         type: 'pie',
         data: {
-            labels: countedOrgTypes.orgtype,
+            labels: countedOrgTypes.organization_type,
             datasets: [{               
                 data: countedOrgTypes.count,
                 backgroundColor: [
@@ -1508,11 +1540,13 @@ function statistics() {
 
 
     var segmentChart = new Chart($('#canvas-segment'), {
-        type: 'bar',
+        type: 'horizontalBar',
         data: {
-            labels: ['Mobilitet', 'Energi', 'Digitalisering'],
+            //labels: ['Mobilitet', 'Energi', 'Digitalisering'],
+            labels: countedSegmentTypes.segment ,
             datasets: [{
-                data: [300, 50, 100],
+                //data: [300, 50, 100],
+                data: countedSegmentTypes.count,
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.5)',
                     'rgba(255, 99, 132, 0.5)',
@@ -1660,14 +1694,57 @@ function loginStatus() {
  */
 function countDistinctSegmentTypes(){
 
+/* ramblings 
+    allSegmentTypes.forEach(segmArray => {
+        segmArray.forEach(segments => {
+            flatSegmentArray.push(segments);
+        }
+    });
 
-    countedSegmentTypes = {segmenttype: [], count: [] } ; //reset before counting
+* end ramblings */
+
+
+
+    const allSegmentTypes = globalMembers.map(x => x.segment); // create an array of all organization_type
+
+    //console.log(JSON.stringify(allSegmentTypes, 0, 4));
+    var flatSegmentArray = []; 
+
+// old school looping - lodash kandidate
+    for (var i = 0; i < allSegmentTypes.length; i++) {
+        var segmetSegmentArray = allSegmentTypes[i];
+        // if no array skip else loop it 
+        for (var j = 0; j < segmetSegmentArray.length; j++) {
+            flatSegmentArray.push(segmetSegmentArray[j]);
+        }
+    }
+
+    var countedSermentTypesKeypair = Object.create(null);
+    // counts the different segment types- but make it in a key pair array
+    flatSegmentArray.forEach(segment => {
+        countedSermentTypesKeypair[segment] = countedSermentTypesKeypair[segment] ? countedSermentTypesKeypair[segment] + 1 : 1;
+    });
+
+    //console.log(JSON.stringify(countedSermentTypesKeypair, 0, 4));
+   // console.log(JSON.stringify(countedSermentTypesKeypair));
+
+    countedSegmentTypes = {segment: [], count: [] } ; //reset before counting
+
+    // transform the key pair to a structure that can be used by chart.js
+    for (var key in countedSermentTypesKeypair) {     // For each item in your object
+        countedSegmentTypes.segment.push(key);
+        // ... and the value as a new data
+        countedSegmentTypes.count.push(countedSermentTypesKeypair[key]);
+    }
+
+   // console.log(JSON.stringify(countedSegmentTypes, 0, 4));
+
 
 }
 
 /*** countDistinctOrgTypes
  *  globalMembers
- * 
+ * https://jsfiddle.net/u1szh96g/2588/
  * 
 */
 function countDistinctOrgTypes(){
@@ -1691,14 +1768,18 @@ buttons.forEach(btn => {
     });
 
 
+    console.log(JSON.stringify(mycountedOrgTypes, 0, 4));
+// end ramblings
 
 
-
+// first version - not usig lodash
 */
     const allOrgTypes = globalMembers.map(x => x.organization_type); // create an array of all organization_type
     var countedOrgTypesKeypair = Object.create(null);
     
-    countedOrgTypes = {orgtype: [], count: [] } ; //reset the array 
+
+
+    countedOrgTypes = {organization_type: [], count: [] } ; //reset the array containing the results
     
 
 
@@ -1708,30 +1789,52 @@ buttons.forEach(btn => {
     });
 
     // transform the key pair to a structure that can be used by chart.js
-
-    
-
-    // For each item in your object
-    for (var key in countedOrgTypesKeypair) {
-        countedOrgTypes.orgtype.push(key);
+    for (var key in countedOrgTypesKeypair) {     // For each item in your object
+        countedOrgTypes.organization_type.push(key);
         // ... and the value as a new data
         countedOrgTypes.count.push(countedOrgTypesKeypair[key]);
     }
 
 
+    //debugging console.log(JSON.stringify(countedOrgTypes, 0, 4));
+
+
+/* using lodash - this is probably how it should be done, but my output is: 
+
+[
+    {
+        "organization_type": "private",
+        "count": 5
+    },
+    {
+        "organization_type": "startup",
+        "count": 1
+    }
+]
+
+It should be
+{
+    "organization_type": [
+        "private",
+        "startup"
+    ],
+    "count": [
+        5,
+        1
+    ]
+}
+//https://stackoverflow.com/questions/37347714/lodash-count-unique-of-field
+
+
+    var mycountedOrgTypes = _(globalMembers)
+        .groupBy('organization_type')
+        .map((items, organization_type) => ({ organization_type, count: items.length }))
+        .value();
+console.log(JSON.stringify(mycountedOrgTypes, 0, 4));
+*/
 
 
 
-/* detteer feil - men kan brukes til annet     
-    //var services = ['weibo', 'facebook', 'twitter', 'xing'];
-    distinctOrgTypes = ['private', 'startup', 'public', 'research', 'civil_society'];
-    var result = _.map(distinctOrgTypes, function(service){ 
-         var length = _.reject(globalMembers, function(el){
-               return (el.id.indexOf(service) < 0); 
-         }).length; 
-         return {id: service, count: length};
-    });
- **/
 }
 
 
@@ -1763,7 +1866,7 @@ const pageTitle = "Smartbykatalogen";   // page title for web page
 document.title = pageTitle; //set it
 
 
-var countedOrgTypes = {orgtype: [], count: [] } ; // This is where we place each distinct organization_type and the count for each organization_type 
+var countedOrgTypes = {organization_type: [], count: [] } ; // This is where we place each distinct organization_type and the count for each organization_type 
 var countedSegmentTypes = {segmenttype: [], count: [] } ; // This is where we place each distinct organization_type and the count for each organization_type 
 
 
@@ -1785,6 +1888,7 @@ function loadOrganizationsFromCKAN2() {
             console.log(JSON.stringify(globalMembers));
             displayMemberCards(); // display the members fetched into globalMembers array                    
             countDistinctOrgTypes(); // Count the number of different org types
+            countDistinctSegmentTypes(); // Count the number of different segment types
             statistics(); //Display updated statistics
 
         })
@@ -1806,6 +1910,7 @@ function loadOrganizationsFromCKAN2() {
     displayMemberCards();
     loginStatus();
     countDistinctOrgTypes(); // Count the number of different org types
+    countDistinctSegmentTypes(); // Count the number of different segment types
     statistics();
     
 

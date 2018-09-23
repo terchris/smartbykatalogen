@@ -3,6 +3,13 @@ $(document).on('click', '.tag-link', function(){
     var statement = $(this).attr('data-statement');
     $('#memberOverlay').modal('hide');
 
+
+        // tracking that a tag is clicked
+        analytics.track('Tag click', {
+            ckan_name: member.name,
+            tag_name: tag
+          });
+
     var $targets = $('.cardbox'); // 
     $targets.show();
 
