@@ -4,12 +4,6 @@ $(document).on('click', '.tag-link', function(){
     $('#memberOverlay').modal('hide');
 
 
-        // tracking that a tag is clicked
-        analytics.track('Tag click', {
-            ckan_name: member.name,
-            tag_name: tag
-          });
-
     var $targets = $('.cardbox'); // 
     $targets.show();
 
