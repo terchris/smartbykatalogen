@@ -1766,56 +1766,6 @@ document.title = pageTitle; //set it
 var countedOrgTypes = {orgtype: [], count: [] } ; // This is where we place each distinct organization_type and the count for each organization_type 
 var countedSegmentTypes = {segmenttype: [], count: [] } ; // This is where we place each distinct organization_type and the count for each organization_type 
 
-/**
- * This is the starting function. It reads the organisations from CKAN 
- * and displays the organizations/members as cards
- */
-function loadOrganizationsFromCKAN() {
-
-
-
-    var client = new CKAN.Client(ckanServer, myAPIkey);
-
-    client.action('organization_list', { all_fields: "true", include_extras: "true", include_users: "true" },
-        function (err, result) {
-            if (err != null) { //some error - try figure out what
-                mylog(mylogdiv, "organization_list ERROR: " + JSON.stringify(err));
-                console.log("organization_list ERROR: " + JSON.stringify(err));
-            } else // we have read the data
-            {
-                //globalMembers = JSON.parse(JSON.stringify(result.result.records));     
-                globalMembers = tidyOrganizations(result.result); // add and remove stuff
-                displayMemberCards(); // display the members fetched into globalMembers array                    
-                countDistinctOrgTypes(); // Count the number of different org types
-            }
-
-        });
-
-
-
-
-    $('a[data-toggle="tooltip"]').tooltip({
-        animated: 'fade',
-        placement: 'bottom',
-        html: true
-    });
-
-
-    searching();
-    getMembersDummyData();
-    displayMemberCards();
-    loginStatus();
-    countDistinctOrgTypes(); // Count the number of different org types
-    statistics();
-    
-
-
-
-    // for dockument ready use: });
-
-};
-
-
 
 
 
