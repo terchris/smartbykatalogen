@@ -100,6 +100,51 @@ function getExtendedUserProperties(user) {
     return user;
 }
 
+/** getOrgTypeIcon
+ * return the icon used to symbolise the org type
+ * hardcoded values MUST correspond with function orgType
+ * Returns icon
+ */
+function getOrgTypeIcon(orgType) {
+
+    const researchIcon = 'graduation-cap';
+    const publicIcon = 'institution';
+    const startupIcon = 'rocket';
+    const privateIcon = 'industry';
+    const civilSocietyIcon = 'group';
+    const defaultIcon = 'support';
+
+    var icon = '';
+    var orgTypeDisplayTxt = '';
+    /* The case values here must correspond with the names in the extended schema for urbalurba*/
+    switch (orgType) {
+        case 'research':
+            icon = researchIcon;
+            orgTypeDisplayTxt = 'FoU';
+            break;
+        case 'public':
+            icon = publicIcon;
+            orgTypeDisplayTxt = 'Offentlig';
+            break;
+        case 'startup':
+            icon = startupIcon;
+            orgTypeDisplayTxt = 'Startup';
+            break;
+        case 'private':
+            icon = privateIcon;
+            orgTypeDisplayTxt = 'Privat';
+            break;
+        case 'civil_society':
+            icon = civilSocietyIcon;
+            orgTypeDisplayTxt = 'Sivilsamfunn';
+            break;
+
+        default:
+            icon = defaultIcon;
+    }
+
+    return icon;
+}
 
 
 
@@ -107,6 +152,7 @@ function getExtendedUserProperties(user) {
 /**
  *  Figuring out what icon to symbolize organisation type
  * Icon set https://linearicons.com/free
+ * NB the fa icon's are used in filtering so if you change. Make sure to change search to
 */
 function orgType(orgType) {
 
@@ -1534,7 +1580,20 @@ function statistics() {
             responsive: true,
             legend: {
                 position: 'right'
-            }
+            },
+            onClick: function (event) {
+                var activePoints = virksomhetChart.getElementsAtEvent(event);
+                if (activePoints[0]) {
+                    var chartData = activePoints[0]['_chart'].config.data;
+                    var idx = activePoints[0]['_index'];
+                    var label = chartData.labels[idx];
+                    var txt = "Du klikket: " + label ;
+                    //console.log(txt);
+                    alert(txt);
+                    filterByOrgType(label);
+                }
+
+            } 
         }
     });
 
@@ -1909,9 +1968,10 @@ function loadOrganizationsFromCKAN2() {
     getMembersDummyData();
     displayMemberCards();
     loginStatus();
-    countDistinctOrgTypes(); // Count the number of different org types
-    countDistinctSegmentTypes(); // Count the number of different segment types
-    statistics();
+    //countDistinctOrgTypes(); // Count the number of different org types
+    //countDistinctSegmentTypes(); // Count the number of different segment types
+    //statistics();
+    
     
 
 

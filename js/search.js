@@ -1,11 +1,30 @@
 $(document).on('click', '.tag-link', function(){ 
-    var tag = $(this).text();
-    var statement = $(this).attr('data-statement');
-    $('#memberOverlay').modal('hide');
+    var tag = $(this).text(); //get the tag we are looking for
+    var statement = $(this).attr('data-statement'); //Get the tag group eg. member tags, segment etc
+    $('#memberOverlay').modal('hide'); //hide the member overlay 
 
 
-    var $targets = $('.cardbox'); // 
-    $targets.show();
+    filterByTag(tag, statement);
+
+    return false;
+});
+
+$(document).on('click', '#searchReset', function(){
+    $('.cardbox').show('fast');
+    $('#searchResponse').hide('fast');
+    $('#searchReset').hide('fast');
+    $('.searchboxfield').val('');
+    return false;
+});
+
+/** filterByTag
+ * Takes two arguments
+ * tag and tagGroup
+ */
+function filterByTag(tag, tagGroup){
+
+    var $targets = $('.cardbox'); // select all cards
+    $targets.show(); // display all cards
 
     //debugger;
     if (tag) {
@@ -15,7 +34,7 @@ $(document).on('click', '.tag-link', function(){
             var matches = 0;
             // Search only in targeted element
             // Search only by tags
-            $target.find('.card-'+statement).each(function () {
+            $target.find('.card-'+tagGroup).each(function () { // on a card. Target the card-segment in <p class="card-segment">mobilitet,robotics</p>
 
                 var fields = $(this).text().split(',');
 
@@ -27,7 +46,7 @@ $(document).on('click', '.tag-link', function(){
 
             });
 
-            if (matches == 0) {
+            if (matches == 0) { //If none of the tags contains the tag, then we hide the card
                 // fix for _display.scss -> .d-flex {display: flex !important;}
                 $target.attr('style','display:none !important');
             }
@@ -41,14 +60,44 @@ $(document).on('click', '.tag-link', function(){
         $('#searchReset').show('fast');  
 
     }
+}
 
-    return false;
-});
 
-$(document).on('click', '#searchReset', function(){
-    $('.cardbox').show('fast');
-    $('#searchResponse').hide('fast');
-    $('#searchReset').hide('fast');
-    $('.searchboxfield').val('');
-    return false;
-});
+
+
+/** filterByOrgType
+ *
+ */
+function filterByOrgType(orgType){
+
+    var orgTypeIcon = getOrgTypeIcon(orgType);
+
+    var $targets = $('.cardbox'); // select all cards
+    $targets.show(); // display all cards
+
+    //debugger;
+    if (orgType) {
+        $targets.each(function () {
+            //debugger;
+            var $target = $(this);
+
+
+            var theOrgType;
+            theOrgType = $target.find('.fa.fa-'+ orgTypeIcon);
+            console.log(theOrgType[0]);
+            var lengden;
+            lengden = theOrgType[0];
+
+                if (lengden == undefined) {
+                    $target.attr('style','display:none !important');
+                }  
+        });
+
+        $('#searchResponse')
+            .show('fast')
+            .find('h4').text('')
+                .append('Searching result by organization <strong>'+orgType+'</strong>:');
+        $('#searchReset').show('fast');  
+
+    }
+}
