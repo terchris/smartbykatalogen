@@ -107,37 +107,50 @@ function getExtendedUserProperties(user) {
  */
 function getOrgTypeIcon(orgType) {
 
-    const researchIcon = 'graduation-cap';
-    const publicIcon = 'institution';
-    const startupIcon = 'rocket';
     const privateIcon = 'industry';
-    const civilSocietyIcon = 'group';
+    const municipalityIcon = 'building';
+    const governmentIcon = 'institution';
+    const associationIcon = 'users';
+    const civilsociety_ngoIcon = 'group';
+    const academiaIcon = 'graduation-cap';
+    const researchIcon = 'flask';
+    
     const defaultIcon = 'support';
 
     var icon = '';
     var orgTypeDisplayTxt = '';
     /* The case values here must correspond with the names in the extended schema for urbalurba*/
     switch (orgType) {
-        case 'research':
-            icon = researchIcon;
-            orgTypeDisplayTxt = 'FoU';
-            break;
-        case 'public':
-            icon = publicIcon;
-            orgTypeDisplayTxt = 'Offentlig';
-            break;
-        case 'startup':
-            icon = startupIcon;
-            orgTypeDisplayTxt = 'Startup';
-            break;
         case 'private':
             icon = privateIcon;
             orgTypeDisplayTxt = 'Privat';
             break;
-        case 'civil_society':
-            icon = civilSocietyIcon;
+        case 'municipality':
+            icon = municipalityIcon;
+            orgTypeDisplayTxt = 'Kommune';
+            break;
+        case 'government':
+            icon = governmentIcon;
+            orgTypeDisplayTxt = 'Offentlig';
+            break;
+        case 'association':
+            icon = associationIcon;
+            orgTypeDisplayTxt = 'Forening';
+            break;
+        case 'civil_society_ngo':
+            icon = civilsociety_ngoIcon;
             orgTypeDisplayTxt = 'Sivilsamfunn';
             break;
+        case 'academia':
+            icon = academiaIcon;
+            orgTypeDisplayTxt = 'Akademia';
+            break;
+        case 'research':
+            icon = researchIcon;
+            orgTypeDisplayTxt = 'FoU';
+            break;
+
+
 
         default:
             icon = defaultIcon;
@@ -151,42 +164,55 @@ function getOrgTypeIcon(orgType) {
 
 /**
  *  Figuring out what icon to symbolize organisation type
- * Icon set https://linearicons.com/free
+ * Icon set https://fontawesome.com/v4.7.0/icons/
  * NB the fa icon's are used in filtering so if you change. Make sure to change search to
 */
 function orgType(orgType) {
 
-    const researchIcon = 'graduation-cap';
-    const publicIcon = 'institution';
-    const startupIcon = 'rocket';
     const privateIcon = 'industry';
-    const civilSocietyIcon = 'group';
+    const municipalityIcon = 'building';
+    const governmentIcon = 'institution';
+    const associationIcon = 'users';
+    const civilsociety_ngoIcon = 'group';
+    const academiaIcon = 'graduation-cap';
+    const researchIcon = 'flask';
+    
     const defaultIcon = 'support';
 
     var icon = '';
     var orgTypeDisplayTxt = '';
     /* The case values here must correspond with the names in the extended schema for urbalurba*/
     switch (orgType) {
-        case 'research':
-            icon = researchIcon;
-            orgTypeDisplayTxt = 'FoU';
-            break;
-        case 'public':
-            icon = publicIcon;
-            orgTypeDisplayTxt = 'Offentlig';
-            break;
-        case 'startup':
-            icon = startupIcon;
-            orgTypeDisplayTxt = 'Startup';
-            break;
         case 'private':
             icon = privateIcon;
             orgTypeDisplayTxt = 'Privat';
             break;
-        case 'civil_society':
-            icon = civilSocietyIcon;
+        case 'municipality':
+            icon = municipalityIcon;
+            orgTypeDisplayTxt = 'Kommune';
+            break;
+        case 'government':
+            icon = governmentIcon;
+            orgTypeDisplayTxt = 'Offentlig';
+            break;
+        case 'association':
+            icon = associationIcon;
+            orgTypeDisplayTxt = 'Forening';
+            break;
+        case 'civil_society_ngo':
+            icon = civilsociety_ngoIcon;
             orgTypeDisplayTxt = 'Sivilsamfunn';
             break;
+        case 'academia':
+            icon = academiaIcon;
+            orgTypeDisplayTxt = 'Akademia';
+            break;
+        case 'research':
+            icon = researchIcon;
+            orgTypeDisplayTxt = 'FoU';
+            break;
+
+
 
         default:
             icon = defaultIcon;
@@ -1903,7 +1929,7 @@ console.log(JSON.stringify(mycountedOrgTypes, 0, 4));
 
 var myAPIkey = ""; // TODO: figure out how to set this a secure way
 var ckanServer = "http://data.urbalurba.com/"; // change to your own to test or use http://demo.ckan.org
-//ckanServer = "http://172.16.1.96/";
+ckanServer = "http://172.16.1.96/";
 //ckanServer = "http://test.urbalurba.no/";
 
 
