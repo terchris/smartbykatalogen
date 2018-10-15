@@ -534,6 +534,38 @@ function readSBNnetworkInfo(member) {
     }
 }
 
+/**
+ * Read all articles in the dataset id SBNnetworkInfo_resource_id into the array globalSBNnetworkInfo
+ *  If the articles are already in the globalSBNnetworkInfo array. Then the articles are displayed 
+ */
+function readSBNnetworkInfo_axios(member) {
+
+    if (Array.isArray(globalSBNnetworkInfo)) { // the array is already read
+        return `
+            ${displayArticles(member)} 
+            `;
+    } else {
+        // First call. Read it from server
+        const ckanURLgetDataset = "api/3/action/datastore_search?resource_id="+ SBNnetworkInfo_resource_id;
+
+        var ckanURL = ckanServer + ckanURLgetDataset;
+    
+        axios.get(ckanURL, { crossdomain: true })
+        .then(function (response) {
+            globalSBNnetworkInfo = response.data.result;
+            document.getElementById("SBNnetworkInfo_resource_id").innerHTML = `
+                ${displayArticles(member)} 
+            `;
+
+        })
+        .catch(function (error) {
+            mylog(mylogdiv, "datastore_search ERROR: " + JSON.stringify(error));
+            console.log("datastore_search ERROR: " + JSON.stringify(error));
+        });
+
+    }
+}
+
 
 
 /**
@@ -847,6 +879,59 @@ function readEmployees(member) {
         else
             return `Kontaktpersoner ikke definert. `;
 }
+
+
+/** readEmployees reads all employees for the organisation
+ * and adds it to the member object in the global array
+ * the field member.employee_resource_id can contain a resource_id for the dataset that contains the employees 
+ * If the member.employee_resource_id contains a valid resource id and it can be read then 
+ * the employees are read into the member.employees array
+ * 
+ * If this function has run before for the organisation, then the member.employees contains a array of all emplyees
+ */
+function readEmployees_axios(member) {
+
+    if (member.hasOwnProperty('employees')) {   // if the field employees is present. 
+        if (Array.isArray(member.employees)) { // employees are already read into member object
+            // when the employees are already in the array we can just output them
+            return `
+                ${displayEmployeesSidebar(member)} 
+            `;
+        }
+    } else // employees are not read
+        if (member.hasOwnProperty('employee_resource_id')) { // there is a property
+            if (isValidResource(member.employee_resource_id)) { // and the member has a valid pointer to a dataset resource
+
+                const ckanURLgetDataset = "api/3/action/datastore_search?resource_id="+ member.employee_resource_id;
+
+                var ckanURL = ckanServer + ckanURLgetDataset;
+
+                axios.get(ckanURL, { crossdomain: true })
+                .then(function (response) {
+                    member.employees = JSON.parse(JSON.stringify(response.data.result));     // copy the employees array to the member 
+                    // we must attach to the div id employees the first time because it has taken time to fetch the employees
+                    document.getElementById("employees").innerHTML = `
+                        ${displayEmployeesSidebar(member)} 
+                    `;
+        
+                })
+                .catch(function (error) {
+                    mylog(mylogdiv, "readEmployees ERROR: " + JSON.stringify(error));
+                    console.log("readEmployees ERROR: " + JSON.stringify(error));
+                });
+                
+
+            } else
+                if (member.employee_resource_id != "") //No valid resource id
+                    return `Kontaktpersoner ikke definert. [ugyldig id]`;
+                else
+                    return `Kontaktpersoner ikke definert.`;
+
+        }
+        else
+            return `Kontaktpersoner ikke definert. `;
+}
+
 
 
 
@@ -1410,7 +1495,7 @@ function displayMemberOverlay(member_id) {
                             <div class="widget widget--widget_meta">
                                 <h3 class="widget__title">Kontaktpersoner</h3>
                                 <div id="employees">
-                                    ${readEmployees(member)} 
+                                    ${readEmployees_axios(member)} 
                                 </div>
                             </div>
 
@@ -1472,7 +1557,7 @@ function displayMemberOverlay(member_id) {
 
                     <main class="col-sm-12 col-lg-12" >
                         <div id="SBNnetworkInfo_resource_id">
-                                ${readSBNnetworkInfo(member)}    
+                                ${readSBNnetworkInfo_axios(member)}    
                             </div>
                         </div>
                     </main>
@@ -1589,14 +1674,16 @@ function statistics() {
                     'rgba(54, 162, 235, 0.5)',
                     'rgba(255, 159, 64, 0.5)',
                     'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)'
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgb(255, 205, 86, 0.5)'
                 ],
                 hoverBackgroundColor: [
                     'rgba(255, 99, 132, 0.9)',
                     'rgba(54, 162, 235, 0.9)',
                     'rgba(255, 159, 64, 0.9)',
                     'rgba(75, 192, 192, 0.9)',
-                    'rgba(153, 102, 255, 0.9)'
+                    'rgba(153, 102, 255, 0.9)',
+                    'rgb(255, 205, 86, 0.9)'
                 ],
                 borderColor: ['#FF6384', '#36A2EB', 'rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(153, 102, 255)'],
                 borderWidth: 1
@@ -1625,38 +1712,19 @@ function statistics() {
 
 
     var segmentChart = new Chart($('#canvas-segment'), {
-        type: 'horizontalBar',
+        type: 'bar',
         data: {
-            //labels: ['Mobilitet', 'Energi', 'Digitalisering'],
+
             labels: countedSegmentTypes.segment ,
             datasets: [{
-                //data: [300, 50, 100],
                 data: countedSegmentTypes.count,
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(255, 159, 64, 0.5)'
-                ],
-                hoverBackgroundColor: [
-                    'rgba(54, 162, 235, 0.9)',
-                    'rgba(255, 99, 132, 0.9)',
-                    'rgba(255, 159, 64, 0.9)'
-                ],
-                borderColor: ['#36A2EB','#FF6384', 'rgb(255, 159, 64)'],
-                borderWidth: 1
+                backgroundColor: "#00b0f0"
             }]
         },
         options: {
-            responsive: true,
+
             legend: {
                 display: false
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
             }
         }
     });
@@ -1810,7 +1878,7 @@ function countDistinctSegmentTypes(){
         countedSermentTypesKeypair[segment] = countedSermentTypesKeypair[segment] ? countedSermentTypesKeypair[segment] + 1 : 1;
     });
 
-    //console.log(JSON.stringify(countedSermentTypesKeypair, 0, 4));
+    console.log(JSON.stringify(countedSermentTypesKeypair, 0, 4));
    // console.log(JSON.stringify(countedSermentTypesKeypair));
 
     countedSegmentTypes = {segment: [], count: [] } ; //reset before counting
@@ -1822,7 +1890,7 @@ function countDistinctSegmentTypes(){
         countedSegmentTypes.count.push(countedSermentTypesKeypair[key]);
     }
 
-   // console.log(JSON.stringify(countedSegmentTypes, 0, 4));
+   console.log(JSON.stringify(countedSegmentTypes, 0, 4));
 
 
 }
@@ -1881,7 +1949,7 @@ buttons.forEach(btn => {
     }
 
 
-    //debugging console.log(JSON.stringify(countedOrgTypes, 0, 4));
+  //  console.log(JSON.stringify(countedOrgTypes, 0, 4));
 
 
 /* using lodash - this is probably how it should be done, but my output is: 
