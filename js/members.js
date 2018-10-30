@@ -552,10 +552,11 @@ function readSBNnetworkInfo_axios(member) {
     
         axios.get(ckanURL, { crossdomain: true })
         .then(function (response) {
-            globalSBNnetworkInfo = response.data.result;
+            globalSBNnetworkInfo = JSON.parse(JSON.stringify(response.data.result.records));
             document.getElementById("SBNnetworkInfo_resource_id").innerHTML = `
                 ${displayArticles(member)} 
             `;
+            //console.log("Articles read and displayed");
 
         })
         .catch(function (error) {
@@ -714,7 +715,6 @@ function isAdminUser(name) {
  * Used to display employees in sidebar
  */
 function employeeTemplateSidebar(employee) {
-
     return `    
     <!-- start employee -->
     <div class="list-group-item list-group-item-divider">
@@ -828,57 +828,6 @@ function displayEmployeesRow(member) {
 
 
 
-/** readEmployees reads all employees for the organisation
- * and adds it to the member object in the global array
- * the field member.employee_resource_id can contain a resource_id for the dataset that contains the employees 
- * If the member.employee_resource_id contains a valid resource id and it can be read then 
- * the employees are read into the member.employees array
- * 
- * If this function has run before for the organisation, then the member.employees contains a array of all emplyees
- */
-function readEmployees(member) {
-
-    if (member.hasOwnProperty('employees')) {   // if the field employees is present. 
-        if (Array.isArray(member.employees)) { // employees are already read into member object
-            // when the employees are already in the array we can just output them
-            return `
-                ${displayEmployeesSidebar(member)} 
-            `;
-        }
-    } else // employees are not read
-        if (member.hasOwnProperty('employee_resource_id')) { // there is a property
-            if (isValidResource(member.employee_resource_id)) { // and the member has a valid pointer to a dataset resource
-
-                var client = new CKAN.Client(ckanServer, myAPIkey);
-
-                client.action('datastore_search', { resource_id: member.employee_resource_id },
-                    function (err, result) {
-
-                        if (err != null) { //some error - try figure out what
-                            debugger;
-                            mylog(mylogdiv, "readEmployees ERROR: " + JSON.stringify(err));
-                            console.log("readEmployees ERROR: " + JSON.stringify(err));
-                        } else // we have read the resource
-                        {
-                            member.employees = JSON.parse(JSON.stringify(result.result.records));     // copy the employees array to the member 
-                            // we must attach to the div id employees the first time because it has taken time to fetch the employees
-                            document.getElementById("employees").innerHTML = `
-                                ${displayEmployeesSidebar(member)} 
-                            `;
-
-                        }
-
-                    });
-            } else
-                if (member.employee_resource_id != "") //No valid resource id
-                    return `Kontaktpersoner ikke definert. [ugyldig id]`;
-                else
-                    return `Kontaktpersoner ikke definert.`;
-
-        }
-        else
-            return `Kontaktpersoner ikke definert. `;
-}
 
 
 /** readEmployees reads all employees for the organisation
@@ -908,7 +857,7 @@ function readEmployees_axios(member) {
 
                 axios.get(ckanURL, { crossdomain: true })
                 .then(function (response) {
-                    member.employees = JSON.parse(JSON.stringify(response.data.result));     // copy the employees array to the member 
+                    member.employees = JSON.parse(JSON.stringify(response.data.result.records));     // copy the employees array to the member 
                     // we must attach to the div id employees the first time because it has taken time to fetch the employees
                     document.getElementById("employees").innerHTML = `
                         ${displayEmployeesSidebar(member)} 
@@ -916,8 +865,8 @@ function readEmployees_axios(member) {
         
                 })
                 .catch(function (error) {
-                    mylog(mylogdiv, "readEmployees ERROR: " + JSON.stringify(error));
                     console.log("readEmployees ERROR: " + JSON.stringify(error));
+                    mylog(mylogdiv, "readEmployees ERROR: " + JSON.stringify(error)); 
                 });
                 
 
@@ -1427,6 +1376,9 @@ function displayMemberOverlay(member_id) {
         ckan_name: member.name,
         display_name: member.display_name
       });
+
+/****  
+    TODO: this stuff is about setting the url and handling back button. Not done yet  
     // change page title to the member beeing displayed
     var memberPageTitle = pageTitle + ": " + member.display_name;
     document.title = memberPageTitle
@@ -1435,7 +1387,7 @@ function displayMemberOverlay(member_id) {
     window.history.pushState('', memberPageTitle, memberURL); //TODO: handle back button
 
     // TODO: change the og attributes $('meta[name="og:title"]').attr('content', pageTitle + ": " + member.display_name);
-
+*///
 
     document.getElementById("displayProfile").innerHTML = `
 
@@ -1585,10 +1537,11 @@ function displayMemberOverlay(member_id) {
 function closeMemberOverlay(name,display_name) {
     // This is not needed $('#memberOverlay').modal('hide');
     
+/** TODO: handling back button
     window.history.back();
 
     document.title = pageTitle ; // change page title back to pageTitle
-    
+***/        
     // tracking that we are closing a member
     analytics.track('Close member', {
         ckan_name: name,
@@ -1878,7 +1831,7 @@ function countDistinctSegmentTypes(){
         countedSermentTypesKeypair[segment] = countedSermentTypesKeypair[segment] ? countedSermentTypesKeypair[segment] + 1 : 1;
     });
 
-    console.log(JSON.stringify(countedSermentTypesKeypair, 0, 4));
+   // console.log(JSON.stringify(countedSermentTypesKeypair, 0, 4));
    // console.log(JSON.stringify(countedSermentTypesKeypair));
 
     countedSegmentTypes = {segment: [], count: [] } ; //reset before counting
@@ -1890,7 +1843,7 @@ function countDistinctSegmentTypes(){
         countedSegmentTypes.count.push(countedSermentTypesKeypair[key]);
     }
 
-   console.log(JSON.stringify(countedSegmentTypes, 0, 4));
+   //console.log(JSON.stringify(countedSegmentTypes, 0, 4));
 
 
 }
@@ -1996,8 +1949,8 @@ console.log(JSON.stringify(mycountedOrgTypes, 0, 4));
 
 
 var myAPIkey = ""; // TODO: figure out how to set this a secure way
-var ckanServer = "http://data.urbalurba.com/"; // change to your own to test or use http://demo.ckan.org
-//ckanServer = "http://172.16.1.96/";
+var ckanServer = "http://data.urbalurba.com/"; // change to your own 
+//ckanServer = "http://172.16.1.96/"; //for testing on local ubuntu VM
 //ckanServer = "http://test.urbalurba.no/";
 
 
@@ -2005,7 +1958,8 @@ var avatarImageDefaut = "http://icons.iconarchive.com/icons/designbolts/free-mal
 //var avatarImageDefaut = "http://icons.iconarchive.com/icons/icons8/windows-8/128/Users-Name-icon.png";
 var organizationImageDefaut = "http://bucket.urbalurba.com/logo/dummylogo.png";
 
-const SBNnetworkInfo_resource_id = "2b8ad5a8-e209-4d29-959d-0460a35c2343";
+
+const SBNnetworkInfo_resource_id = "2b8ad5a8-e209-4d29-959d-0460a35c2343"; //for testing on local ubuntu VM 
 let adminUsersToRemove = ["terchris"]; // the ckan main admin is usually a member. so remove that one
 
 // For logging to screen
@@ -2038,7 +1992,7 @@ function loadOrganizationsFromCKAN2() {
         .then(function (response) {
 
             globalMembers = tidyOrganizations(response.data.result); // add and remove stuff
-            console.log(JSON.stringify(globalMembers));
+            //console.log(JSON.stringify(globalMembers));
             displayMemberCards(); // display the members fetched into globalMembers array                    
             countDistinctOrgTypes(); // Count the number of different org types
             countDistinctSegmentTypes(); // Count the number of different segment types
