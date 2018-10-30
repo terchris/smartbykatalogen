@@ -1618,7 +1618,7 @@ function orgUpdateField(org_id, fieldName, fieldValue) {
 
 
     debugger;
-    var client = new CKAN.Client(ckanServer, myAPIkey);
+    var client = new CKAN.Client(ckanServer, myAPIkey); //TODO: remove ckan
 
     client.action('organization_patch', ckanParameters,
         function (err, result) {
@@ -1702,7 +1702,7 @@ function statistics() {
                     var label = chartData.labels[idx];
                     var txt = "Du klikket: " + label ;
                     //console.log(txt);
-                    alert(txt);
+                    //alert(txt);
                     filterByOrgType(label);
                 }
 
