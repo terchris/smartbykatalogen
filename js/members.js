@@ -1997,7 +1997,7 @@ console.log(JSON.stringify(mycountedOrgTypes, 0, 4));
 
 var myAPIkey = ""; // TODO: figure out how to set this a secure way
 var ckanServer = "http://data.urbalurba.com/"; // change to your own to test or use http://demo.ckan.org
-ckanServer = "http://172.16.1.96/";
+//ckanServer = "http://172.16.1.96/";
 //ckanServer = "http://test.urbalurba.no/";
 
 
