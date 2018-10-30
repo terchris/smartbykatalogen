@@ -8,6 +8,15 @@
     <meta name="keyword" content="CKAN,Bootstrap,JavaScript,Open,Source,jQuery,Organization,Members">
     <title>Smartbykatalogen</title>
 
+
+    <meta property="og:title" content="Smartbykatalogen" />
+    <meta property="og:description" content="Smartbykatalogen er oversikten over aktører i det norske smartbymarkedet" />
+    <meta property="og:url" content="http://smartbykatalogen.no" />
+    <meta property="og:image" content="http://bucket.urbalurba.com/logo/smartbykatalogen.jpg" />
+    <meta property="og:locale" content="no_NO" />
+    <meta property="og:site_name" content="Smartbykatalogen" />
+
+
     <!-- For tracking usage -->
     <script>
         !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
@@ -16,25 +25,11 @@
         }}();
       </script>
 
-
-<!-- https creats problems - 
-<script>
-    if (window.location.protocol == "https:") {
-      console.log("You are using https ")
-      console.log("Reloading in http")
-      window.location = document.URL.replace("https://", "http://");
-    }
-
-    if (window.location.protocol == "http:") {
-      console.log("You are using http. that just works.")
-    }
-</script>
-so force http -->
-
+    
     <!-- Squarespace header copy start. Paste to Settings - Advanced - PAGE HEADER CODE INJECTION-->
     <!-- Main styles for this application -->
     <link href="css/style.css" rel="stylesheet">
-    
+    <!--link href="http://ckan.urbalurba.com/css/style.css" rel="stylesheet"-->
     <!-- From coreui.io START-->
     <!-- Icons-->
     <link href="vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -53,11 +48,10 @@ so force http -->
     <!-- Chart.js -->
     <script src="vendors/chart.js/js/Chart.min.js"></script>
 
-    <!-- CKAN api -->
-    <!--
-    <script src="js/ckan.js"></script>
-    -->
-
+    <!-- CKAN api 
+    
+    <script src="//okfnlabs.org/ckan.js/ckan.js"></script>
+-->
     <!-- axios for rewrite of loadOrganizationsFromCKAN2 -->
     <script src="//unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -69,6 +63,11 @@ so force http -->
     <script type="text/javascript" src="js/search.js"></script>
     <!-- Custom styles -->
     <link href="css/custom.css" rel="stylesheet">
+    
+
+<!--  TODO: put locally-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+
 
 </head>
 
