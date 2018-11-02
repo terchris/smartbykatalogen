@@ -1,0 +1,573 @@
+<html lang="no">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="author" content="Terje Christensen">
+    <meta name="keyword" content="CKAN,Bootstrap,JavaScript,Open,Source,jQuery,Organization,Members">
+    <title>Smartbykatalogen</title>
+
+
+    <meta property="og:title" content="Smartbykatalogen" />
+    <meta property="og:description" content="Smartbykatalogen er oversikten over aktører i det norske smartbymarkedet" />
+    <meta property="og:url" content="http://smartbykatalogen.no" />
+    <meta property="og:image" content="http://bucket.urbalurba.com/logo/smartbykatalogen.jpg" />
+    <meta property="og:locale" content="no_NO" />
+    <meta property="og:site_name" content="Smartbykatalogen" />
+
+
+    <!-- For tracking usage -->
+    <script>
+        !function () {
+            var analytics = window.analytics = window.analytics || []; if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
+                analytics.invoked = !0; analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on"]; analytics.factory = function (t) { return function () { var e = Array.prototype.slice.call(arguments); e.unshift(t); analytics.push(e); return analytics } }; for (var t = 0; t < analytics.methods.length; t++) { var e = analytics.methods[t]; analytics[e] = analytics.factory(e) } analytics.load = function (t, e) { var n = document.createElement("script"); n.type = "text/javascript"; n.async = !0; n.src = "https://cdn.segment.com/analytics.js/v1/" + t + "/analytics.min.js"; var a = document.getElementsByTagName("script")[0]; a.parentNode.insertBefore(n, a); analytics._loadOptions = e }; analytics.SNIPPET_VERSION = "4.1.0";
+                analytics.load("PLOUnuYB4sNHRgMvnl3PPgJNA0VPCsmd");
+                analytics.page();
+            }
+        }();
+    </script>
+
+
+    <!-- Squarespace header copy start. Paste to Settings - Advanced - PAGE HEADER CODE INJECTION-->
+    <!-- Main styles for this application -->
+    <link href="css/style.css" rel="stylesheet">
+    <!--link href="http://ckan.urbalurba.com/css/style.css" rel="stylesheet"-->
+    <!-- From coreui.io START-->
+    <!-- Icons-->
+    <link href="vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="vendors/jquery/js/jquery.min.js"></script>
+    <script src="vendors/popper.js/js/popper.min.js"></script>
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/pace-progress/js/pace.min.js"></script>
+    <script src="vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+    <script src="vendors/@coreui/coreui/js/coreui.min.js"></script>
+    <!-- From coreui.io STOP-->
+
+    <!-- Chart.js -->
+    <script src="vendors/chart.js/js/Chart.min.js"></script>
+
+
+    <!-- axios for rewrite of loadOrganizationsFromCKAN2 -->
+    <script src="//unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script type="text/javascript" src="js/members.js"></script>
+    <link href="css/members.css" rel="stylesheet">
+
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="js/search.js"></script>
+    <!-- Custom styles -->
+    <link href="css/custom.css" rel="stylesheet">
+
+
+    <!--  TODO: put locally-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+
+
+</head>
+
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done">
+
+
+
+    <!-- Outer container start. Squarespace copy start. Paste into code block -->
+
+    <!-- overlay start -->
+    <!-- terchris comment The onclick="closeMemberOverlay()" is removed from the line below -->
+    <div class="modal fade" id="memberOverlay" tabindex="-1" role="dialog" aria-labelledby="memberOverlayTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" id="displayProfile"></div>
+        </div>
+    </div>
+
+    <!--  modal edit form -->
+    <!-- Modal -->
+    <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel" aria-hidden="true">
+        jalla
+    </div>
+
+    <!-- Modal login -->
+    <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="loginFormTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body">
+                    <form>
+                        <div class="card-group">
+                            <div class="card p-4">
+                                <div class="card-body">
+                                    <h1>Login</h1>
+                                    <p class="text-muted">Sign In to your account</p>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="icon-user"></i>
+                                            </span>
+                                        </div>
+                                        <input id="username" type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="icon-lock"></i>
+                                            </span>
+                                        </div>
+                                        <input id="password" type="password" class="form-control" placeholder="Password">
+                                    </div>
+
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="icon-key"></i>
+                                            </span>
+                                        </div>
+                                        <input id="apikey" type="text" class="form-control" placeholder="your api key">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <button onclick="doLogin()" type="button" class="btn btn-primary px-4">Login</button>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                                <div class="card-body text-center">
+                                    <div>
+                                        <h2>Bli medlem</h2>
+                                        <p>Registrer din virksomhet i Smarte Byer Norge -Nettverket</p>
+                                        <p>Bli invitert til aktiviteter vi arrangerer, høringsrunder, og bli synlig for
+                                            andre
+                                            i nettverket.</p>
+                                        <button type="button" class="btn btn-primary active mt-3">Register Now!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+
+        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <a class="navbar-brand d-none d-md-block" href="index.html">
+                    <img class="navbar-brand-full d-inline-block align-top" src="http://data.urbalurba.com/img/b-logo-dark.svg"
+                        height="25" alt="Urbalurba Logo">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <ul class="nav navbar-nav d-md-down-none">
+                    <li class="nav-item px-3">
+
+                        <a href="#statisticSearch" data-toggle="collapse">Søk</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="#statisticOrgType" data-toggle="collapse">Virksomheter</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="#statisticSegments" data-toggle="collapse">Segmenter</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="#statisticSustainable_development_goals" data-toggle="collapse">Bærekraftsmål</a>
+                    </li>
+                    <li class="nav-item px-3">
+
+                        <a href="#statisticProblemSolved" data-toggle="collapse">Problemer</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a href="#statisticTagcloud" data-toggle="collapse">Tag cloud</a>
+                    </li>
+
+                </ul>
+
+
+
+
+
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <div id="loginstatus" class="float-right nav11 navbar-nav11 ml-auto11">
+                            some status
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+    <div class="app-body">
+        <main class="main">
+
+
+
+
+
+            <!-- End top search -->
+            <!-- Start statisticsGrp-->
+            <div class="container" id="statisticsGrp">
+                <!-- Search -->
+                <div class="collapse show" id="statisticSearch" data-parent="#statisticsGrp">
+                        <div class="container">
+                                <div class="row">
+                                    <div class="col-12" style="margin-top:115px;height:92px;width:272px">
+                                        <img class="mx-auto d-block" height="92px" width="272px" src="http://bucket.urbalurba.com/logo/smartbykatalogen.png">
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px">
+                
+                                    <div class="col-12">
+                                        <form>
+                                            <input class="form-control searchboxfield" type="search" placeholder="Search" aria-label="Search">
+                                        </form>
+                                    </div>
+                
+                
+                                </div>
+                
+                                <div class="container" style="margin-bottom:15px">
+                                    <div class="row text-center">
+                
+                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                                            <i class="fa fa-industry fa-3x mt-4"></i>
+                                            <div class="text-muted">private</div>
+                                            <strong>111 Medlemmer (40%)</strong>
+                
+                                        </div>
+                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                                            <i class="fa fa-building fa-3x mt-4"></i>
+                                            <div class="text-muted">municipality</div>
+                                            <strong>24 Medlemmer (40%)</strong>
+                                        </div>
+                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                                            <i class="fa fa-institution fa-3x mt-4"></i>
+                                            <div class="text-muted">government</div>
+                                            <strong>24 Medlemmer (40%)</strong>
+                
+                                        </div>
+                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                                            <i class="fa fa-users fa-3x mt-4"></i>
+                                            <div class="text-muted">association</div>
+                                            <strong>24 Medlemmer (40%)</strong>
+                
+                                        </div>
+                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                                            <i class="fa fa-group fa-3x mt-4"></i>
+                                            <div class="text-muted">civil_society_ngo</div>
+                                            <strong>24 Medlemmer (40%)</strong>
+                
+                                        </div>
+                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                                            <i class="fa fa-graduation-cap fa-3x mt-4"></i>
+                                            <div class="text-muted">academia</div>
+                                            <strong>24 Medlemmer (40%)</strong>
+                
+                                        </div>
+                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                                            <i class="fa fa-flask fa-3x mt-4"></i>
+                                            <div class="text-muted">research</div>
+                                            <strong>24 Medlemmer (40%)</strong>
+                
+                                        </div>
+                
+                
+                
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+                <!-- End search-->
+                <!-- This is where the org type statistics are displayed-->
+                <div class="collapse" id="statisticOrgType" data-parent="#statisticsGrp">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <h4 class="card-title mb-0">Medlems virksomheter</h4>
+                                    <div class="small text-muted">Fordeling av medlemmene</div>
+                                </div>
+                            </div>
+
+                            <div class="chart-wrapper" style="height:300px;margin-top:40px;">
+                                <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                    </div>
+                                </div>
+                                <canvas class="chart chartjs-render-monitor" id="canvas-virksomhet" height="300" width="1274"
+                                    style="display: block; width: 1274px; height: 300px;"></canvas>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div> <!-- end collapse -->
+                <!-- END org type ststistics-->
+
+
+
+                <!-- This is where the segment type statistics are displayed-->
+                <div class="collapse" id="statisticSegments" data-parent="#statisticsGrp">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <h4 class="card-title mb-0">Segmenter</h4>
+                                    <div class="small text-muted">Segmentene medlemmene tilhører</div>
+                                </div>
+                            </div>
+
+                            <div class="chart-wrapper" style="height:300px;margin-top:40px;">
+                                <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                    </div>
+                                </div>
+                                <canvas class="chart chartjs-render-monitor" id="canvas-segment" height="300" width="1274"
+                                    style="display: block; width: 1274px; height: 300px;"></canvas>
+
+                            </div>
+                        </div>
+
+                    </div> <!-- end card-->
+
+                </div> <!-- end collapse -->
+                <!-- END segment type ststistics-->
+
+
+
+                <!-- This is where the sustainable_development_goals statistics are displayed-->
+                <div class="collapse" id="statisticSustainable_development_goals" data-parent="#statisticsGrp">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <h4 class="card-title mb-0">Bærekraftsmålene</h4>
+                                    <div class="small text-muted">Hvilke bærekraftsmål medlemmene adresserer</div>
+                                </div>
+                            </div>
+
+                            <div class="chart-wrapper" style="height:300px;margin-top:40px;">
+                                <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                    </div>
+                                </div>
+                                <canvas class="chart chartjs-render-monitor" id="canvas-sustainable_development_goals"
+                                    height="300" width="1274" style="display: block; width: 1274px; height: 300px;"></canvas>
+
+                            </div>
+                        </div>
+
+                    </div> <!-- end card -->
+                </div> <!--  end collapse -->
+                <!-- END sustainable_development_goals ststistics -->
+
+            </div>
+            <!-- End statisticsGrp-->
+
+            <!-- This is where the search filtering is displayed-->
+            <!-- use style="display:none;" to hide and show it-->
+            <div class="container-fluid" id="searchResponse" >
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-search"></i> 
+                    Displaying: <h4>Resultat</h4>
+                    <!--  <span class="badge badge-success ">Reset search results</span> -->
+                    <!-- btn btn-warning -->
+                    <button class="badge badge-warning my-2 my-sm-0" id="searchReset" type="button" style="display: none;"><i
+                        class="fa fa-refresh"></i> 
+                        Reset search results
+                    </button>
+
+                        <div class="card-header-actions">
+
+                        <a class="card-header-action btn-setting" href="#">
+                            <i class="fa fa-table"></i>
+                        </a>
+                        <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseExample"
+                            aria-expanded="true">
+                            <i class="fa fa-map-marker  /i>"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+            <!-- This is where the javascrip loads its stuff -->
+            <div class="container-fluid" id="app"></div>
+
+
+        </main> <!-- /.main -->
+    </div> <!-- /.app-body -->
+    <script>
+        // Wait until all scrips has load before executing
+        // This script must be placed just before the end body tag
+        //$(document).ready(function () {
+        loadOrganizationsFromCKAN2()
+
+       // });
+    </script>
+    <style>
+        @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+        .navbar-icon-top .navbar-nav .nav-link>.fa {
+            position: relative;
+            width: 36px;
+            font-size: 24px;
+        }
+
+        .navbar-icon-top .navbar-nav .nav-link>.fa>.badge {
+            font-size: 0.75rem;
+            position: absolute;
+            right: 0;
+            font-family: sans-serif;
+        }
+
+        .navbar-icon-top .navbar-nav .nav-link>.fa {
+            top: 3px;
+            line-height: 12px;
+        }
+
+        .navbar-icon-top .navbar-nav .nav-link>.fa>.badge {
+            top: -10px;
+        }
+
+        @media (min-width: 576px) {
+            .navbar-icon-top.navbar-expand-sm .navbar-nav .nav-link {
+                text-align: center;
+                display: table-cell;
+                height: 70px;
+                vertical-align: middle;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .navbar-icon-top.navbar-expand-sm .navbar-nav .nav-link>.fa {
+                display: block;
+                width: 48px;
+                margin: 2px auto 4px auto;
+                top: 0;
+                line-height: 24px;
+            }
+
+            .navbar-icon-top.navbar-expand-sm .navbar-nav .nav-link>.fa>.badge {
+                top: -7px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link {
+                text-align: center;
+                display: table-cell;
+                height: 70px;
+                vertical-align: middle;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link>.fa {
+                display: block;
+                width: 48px;
+                margin: 2px auto 4px auto;
+                top: 0;
+                line-height: 24px;
+            }
+
+            .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link>.fa>.badge {
+                top: -7px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .navbar-icon-top.navbar-expand-lg .navbar-nav .nav-link {
+                text-align: center;
+                display: table-cell;
+                height: 70px;
+                vertical-align: middle;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .navbar-icon-top.navbar-expand-lg .navbar-nav .nav-link>.fa {
+                display: block;
+                width: 48px;
+                margin: 2px auto 4px auto;
+                top: 0;
+                line-height: 24px;
+            }
+
+            .navbar-icon-top.navbar-expand-lg .navbar-nav .nav-link>.fa>.badge {
+                top: -7px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link {
+                text-align: center;
+                display: table-cell;
+                height: 70px;
+                vertical-align: middle;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link>.fa {
+                display: block;
+                width: 48px;
+                margin: 2px auto 4px auto;
+                top: 0;
+                line-height: 24px;
+            }
+
+            .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link>.fa>.badge {
+                top: -7px;
+            }
+        }
+    </style>
+
+    <!-- Outer container Stop. Squarespace copy stop -->
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1327,8 +1327,31 @@ function doLogin() {
     $('#loginForm').modal('hide')
 }
 
+/*** statOrgTypes NOT IN USE yet
+ * Displays stattistics about org types  
+ * 
+ */
+function statOrgTypes(){
 
+    document.getElementById("app").innerHTML = `
+    <!-- start statOrgTypes -->
+    <div class="row">
+    
+    <div class="col-sm-12 col-md-4 d-flex">
+        <div class="card flex-fill">
+            <div class="card-header">Virksomhets typer</div>
+            <div class="card-body">
+                <div class="chart-wrapper">
+                    <canvas id="canvas-virksomhet" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End statOrgTypes -->
 
+    `;
+
+}
 
 
 /** displayMemberCards display all members in the 
