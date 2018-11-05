@@ -74,9 +74,15 @@
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done">
 
+    <!-- progress bar ? -->
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
 
 
-    <!-- Outer container start. Squarespace copy start. Paste into code block -->
 
     <!-- overlay start -->
     <!-- terchris comment The onclick="closeMemberOverlay()" is removed from the line below -->
@@ -162,97 +168,158 @@
         </div>
     </div>
 
-    <header>
+    <header class="app-header navbar">
+        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img class="navbar-brand-full" src="http://www.husoe.no/themes/husoe/urbalurba3.svg" width="89" height="25"
+                alt="Urbalurba Logo">
+            <img class="navbar-brand-minimized" src="http://data.urbalurba.com/img/b-logo-dark.svg" width="30" height="30"
+                alt="Urbalurba Logo">
+        </a>
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Top banner menu computer screen -->
+        <ul class="nav navbar-nav d-md-down-none">
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#statisticSearch" data-toggle="collapse">Søk</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#statisticOrgType" data-toggle="collapse">Virksomheter</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#statisticSegments" data-toggle="collapse">Segmenter</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#statisticSustainable_development_goals" data-toggle="collapse">Bærekraftsmål</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#statisticProblemSolved" data-toggle="collapse">Problemer</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#statisticTagcloud" data-toggle="collapse">Tag cloud</a>
+            </li>
 
-        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light">
-            <div class="container-fluid">
+        </ul>
 
-                <a class="navbar-brand d-none d-md-block" href="index.html">
-                    <img class="navbar-brand-full d-inline-block align-top" src="http://data.urbalurba.com/img/b-logo-dark.svg"
-                        height="25" alt="Urbalurba Logo">
-                </a>
+        <!-- THIS IS JUST COPIED -->
+        <ul class="nav navbar-nav ml-auto">
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-
-
-
-
-                <ul class="nav navbar-nav d-md-down-none">
-                    <li class="nav-item px-3">
-                        <a class="nav-link" href="#statisticSearch" data-toggle="collapse">Søk</a>
-                    </li>
-                    <li class="nav-item px-3">
-                        <a class="nav-link" href="#statisticOrgType" data-toggle="collapse">Virksomheter</a>
-                    </li>
-                    <li class="nav-item px-3">
-                        <a class="nav-link" href="#statisticSegments" data-toggle="collapse">Segmenter</a>
-                    </li>
-                    <li class="nav-item px-3">
-                        <a class="nav-link" href="#statisticSustainable_development_goals" data-toggle="collapse">Bærekraftsmål</a>
-                    </li>
-                    <li class="nav-item px-3">
-                        <a class="nav-link" href="#statisticProblemSolved" data-toggle="collapse">Problemer</a>
-                    </li>
-                    <li class="nav-item px-3">
-                        <a class="nav-link" href="#statisticTagcloud" data-toggle="collapse">Tag cloud</a>
-                    </li>
-
-                </ul>
-
-
-
-
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <div id="loginstatus" class="float-right nav11 navbar-nav11 ml-auto11">
-                            some status
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+                        <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-header text-center">
+                            <strong>Settings</strong>
                         </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                        <a class="dropdown-item" href="#">
+                            <i class="fa fa-user"></i> Login</a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fa fa-wrench"></i> Registrer prosjekt</a>
+                        <div class="divider"></div>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fa fa-lock"></i> Logout</a>
+                    </div>
+                </li>
+            </ul>
+
+
+
+
+<!-- end THIS IS JUST COPIED -->
+
+
+
+
 
     </header>
     <div class="app-body">
+
+        <div class="sidebar">
+            <nav class="sidebar-nav ps ps--active-y">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#statisticSearch" data-toggle="collapse">
+                            <i class="nav-icon icon-home"></i> Søk</a>
+                    </li>
+                    <li class="nav-title">Medlemmer</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#statisticOrgType" data-toggle="collapse">
+                            <i class="nav-icon icon-pie-chart"></i> Virksomheter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#statisticSegments" data-toggle="collapse">
+                            <i class="nav-icon icon-list"></i> Segmenter</a>
+                    </li>
+
+                    <li class="nav-item">
+                            <a class="nav-link" href="#statisticSustainable_development_goals" data-toggle="collapse">
+                                <i class="nav-icon icon-key"></i> Bærekraftsmål</a>
+                        </li>
+
+                        <li class="nav-item">
+                                <a class="nav-link" href="#statisticProblemSolved" data-toggle="collapse">
+                                    <i class="nav-icon icon-pencil"></i> Problemer</a>
+                            </li>
+    
+                            <li class="nav-item">
+                                    <a class="nav-link" href="#statisticTagcloud" data-toggle="collapse">
+                                        <i class="nav-icon icon-tag"></i> Tag cloud</a>
+                                </li>
+                    <li class="nav-divider"></li>
+                    <li class="nav-title">Prosjekter</li>
+ 
+
+                </ul>
+                <div class="ps__rail-x" style="left: 0px; bottom: -765px;">
+                    <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                </div>
+                <div class="ps__rail-y" style="top: 765px; height: 760px; right: 0px;">
+                    <div class="ps__thumb-y" tabindex="0" style="top: 320px; height: 317px;"></div>
+                </div>
+            </nav>
+            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+        </div>
+
+
+
+
         <main class="main">
-
-
-
-
-
             <!-- End top search -->
             <!-- Start statisticsGrp-->
             <div class="container" id="statisticsGrp">
                 <!-- Search -->
                 <div class="collapse show" id="statisticSearch" data-parent="#statisticsGrp">
-                        <div class="container">
-                                <div class="row">
-                                    <div class="col-12" style="margin-top:115px;height:92px;width:272px">
-                                        <img class="mx-auto d-block" height="92px" width="312px" src="http://bucket.urbalurba.com/logo/smartbykatalogen.png">
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-top:15px">
-                
-                                    <div class="col-12">
-                                        <form>
-                                            <input class="form-control searchboxfield" type="search" placeholder="Search" aria-label="Search">
-                                        </form>
-                                    </div>
-                
-                
-                                </div>
-                
-                                <div class="container" id="displayOrgTypes" style="margin-bottom:15px">
-<!-- row with orf types -->
-<div class="row text-center">
-    Reading members and calculating
-    </div>
-                                </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12" style="margin-top:115px;height:92px;width:272px">
+                                <img class="mx-auto d-block" height="92px" width="312px" src="http://bucket.urbalurba.com/logo/smartbykatalogen.png">
                             </div>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+
+                            <div class="col-12">
+                                <form>
+                                    <input class="form-control searchboxfield" type="search" placeholder="Search"
+                                        aria-label="Search">
+                                </form>
+                            </div>
+
+
+                        </div>
+
+                        <div class="container" id="displayOrgTypes" style="margin-bottom:15px">
+                            <!-- row with orf types -->
+                            <div class="row text-center">
+                                Reading members and calculating
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- End search-->
                 <!-- This is where the org type statistics are displayed-->
@@ -358,33 +425,33 @@
 
             <!-- This is where the search filtering is displayed-->
             <!-- use style="display:none;" to hide and show it-->
-            <div class="container-fluid" id="searchResponse" >
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa fa-search"></i> 
-                    Displaying: <b>.</b> 
-                    <!--  <span class="badge badge-success ">Reset search results</span> -->
-                    <!-- btn btn-warning -->
-                    <button class="badge badge-warning my-2 my-sm-0" id="searchReset" type="button" style="display: none;"><i
-                        class="fa fa-refresh"></i> 
-                        Reset search results
-                    </button>
+            <div class="container-fluid" id="searchResponse">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-search"></i>
+                        Displaying: <b>.</b>
+                        <!--  <span class="badge badge-success ">Reset search results</span> -->
+                        <!-- btn btn-warning -->
+                        <button class="badge badge-warning my-2 my-sm-0" id="searchReset" type="button" style="display: none;"><i
+                                class="fa fa-refresh"></i>
+                            Reset search results
+                        </button>
 
                         <div class="card-header-actions">
 
-                        <a class="card-header-action btn-setting" href="#">
-                            <i class="fa fa-table"></i>
-                        </a>
-                        <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseExample"
-                            aria-expanded="true">
-                            <i class="fa fa-map-marker  /i>"></i>
-                        </a>
+                            <a class="card-header-action btn-setting" href="#">
+                                <i class="fa fa-table"></i>
+                            </a>
+                            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseExample"
+                                aria-expanded="true">
+                                <i class="fa fa-map-marker  /i>"></i>
+                            </a>
 
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
             <!-- This is where the javascrip loads its stuff -->
             <div class="container-fluid" id="app"></div>
 
