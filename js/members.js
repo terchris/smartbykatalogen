@@ -1337,7 +1337,7 @@ function doLogin() {
 function displayOrgTypes(){
 var dummy = "";
 getOrgTypeIcon(orgType)
-dummy = '<div class="row text-center">';
+dummy = '<div class="row ">';
 
 for (var i = 0; i < countedOrgTypes.count.length; i++) {
     dummy = dummy + '<div onclick="filterByOrgType(countedOrgTypes.organization_type[';
