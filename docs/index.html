@@ -177,31 +177,31 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+
+
+
+
                 <ul class="nav navbar-nav d-md-down-none">
                     <li class="nav-item px-3">
-
-                        <a href="#statisticSearch" data-toggle="collapse">Søk</a>
+                        <a class="nav-link" href="#statisticSearch" data-toggle="collapse">Søk</a>
                     </li>
                     <li class="nav-item px-3">
-                        <a href="#statisticOrgType" data-toggle="collapse">Virksomheter</a>
+                        <a class="nav-link" href="#statisticOrgType" data-toggle="collapse">Virksomheter</a>
                     </li>
                     <li class="nav-item px-3">
-                        <a href="#statisticSegments" data-toggle="collapse">Segmenter</a>
+                        <a class="nav-link" href="#statisticSegments" data-toggle="collapse">Segmenter</a>
                     </li>
                     <li class="nav-item px-3">
-                        <a href="#statisticSustainable_development_goals" data-toggle="collapse">Bærekraftsmål</a>
+                        <a class="nav-link" href="#statisticSustainable_development_goals" data-toggle="collapse">Bærekraftsmål</a>
                     </li>
                     <li class="nav-item px-3">
-
-                        <a href="#statisticProblemSolved" data-toggle="collapse">Problemer</a>
+                        <a class="nav-link" href="#statisticProblemSolved" data-toggle="collapse">Problemer</a>
                     </li>
                     <li class="nav-item px-3">
-                        <a href="#statisticTagcloud" data-toggle="collapse">Tag cloud</a>
+                        <a class="nav-link" href="#statisticTagcloud" data-toggle="collapse">Tag cloud</a>
                     </li>
 
                 </ul>
-
-
 
 
 
@@ -232,7 +232,7 @@
                         <div class="container">
                                 <div class="row">
                                     <div class="col-12" style="margin-top:115px;height:92px;width:272px">
-                                        <img class="mx-auto d-block" height="92px" width="272px" src="http://bucket.urbalurba.com/logo/smartbykatalogen.png">
+                                        <img class="mx-auto d-block" height="92px" width="312px" src="http://bucket.urbalurba.com/logo/smartbykatalogen.png">
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:15px">
@@ -246,54 +246,11 @@
                 
                                 </div>
                 
-                                <div class="container" style="margin-bottom:15px">
-                                    <div class="row text-center">
-                
-                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                                            <i class="fa fa-industry fa-3x mt-4"></i>
-                                            <div class="text-muted">private</div>
-                                            <strong>111 Medlemmer (40%)</strong>
-                
-                                        </div>
-                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                                            <i class="fa fa-building fa-3x mt-4"></i>
-                                            <div class="text-muted">municipality</div>
-                                            <strong>24 Medlemmer (40%)</strong>
-                                        </div>
-                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                                            <i class="fa fa-institution fa-3x mt-4"></i>
-                                            <div class="text-muted">government</div>
-                                            <strong>24 Medlemmer (40%)</strong>
-                
-                                        </div>
-                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                                            <i class="fa fa-users fa-3x mt-4"></i>
-                                            <div class="text-muted">association</div>
-                                            <strong>24 Medlemmer (40%)</strong>
-                
-                                        </div>
-                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                                            <i class="fa fa-group fa-3x mt-4"></i>
-                                            <div class="text-muted">civil_society_ngo</div>
-                                            <strong>24 Medlemmer (40%)</strong>
-                
-                                        </div>
-                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                                            <i class="fa fa-graduation-cap fa-3x mt-4"></i>
-                                            <div class="text-muted">academia</div>
-                                            <strong>24 Medlemmer (40%)</strong>
-                
-                                        </div>
-                                        <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                                            <i class="fa fa-flask fa-3x mt-4"></i>
-                                            <div class="text-muted">research</div>
-                                            <strong>24 Medlemmer (40%)</strong>
-                
-                                        </div>
-                
-                
-                
-                                    </div>
+                                <div class="container" id="displayOrgTypes" style="margin-bottom:15px">
+<!-- row with orf types -->
+<div class="row text-center">
+    Reading members and calculating
+    </div>
                                 </div>
                             </div>
                 </div>
@@ -405,7 +362,7 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-search"></i> 
-                    Displaying: <h4>Resultat</h4>
+                    Displaying: <b>.</b> 
                     <!--  <span class="badge badge-success ">Reset search results</span> -->
                     <!-- btn btn-warning -->
                     <button class="badge badge-warning my-2 my-sm-0" id="searchReset" type="button" style="display: none;"><i

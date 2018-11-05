@@ -676,15 +676,15 @@ function searching() {
             });
 
             $overall = $targets.filter(':visible').length;
+            updateSearchStatus(text, 'Found '+ $overall);
             if($overall === 0){
-                $('#searchResponse')
-                .show('fast')
-                .find('h4').text('')
-                    .append('No search results found');
+                updateSearchStatus(text, 'No search results found');
+
             }
 
         } else {
             $('#searchReset').hide('fast');  
+            updateSearchStatus(text, 'Found '+ $overall);
         }
         
     });
@@ -1327,51 +1327,40 @@ function doLogin() {
     $('#loginForm').modal('hide')
 }
 
-/*** statOrgTypes NOT IN USE yet
- * Displays stattistics about org types  
- * 
+
+
+/*** displayOrgTypes 
+ * Displays the different org types and the count
+ *  var countedOrgTypes = {organization_type: [], count: [] }
+ * onclick="filterByOrgType(countedOrgTypes.organization_type[i])"
  */
-function statOrgTypes(){
+function displayOrgTypes(){
+var dummy = "";
+getOrgTypeIcon(orgType)
+dummy = '<div class="row text-center">';
 
-    document.getElementById("app").innerHTML = `
-    <!-- start statOrgTypes -->
-    <div class="row">
-    
-    <div class="col-sm-12 col-md-4 d-flex">
-        <div class="card flex-fill">
-            <div class="card-header">Virksomhets typer</div>
-            <div class="card-body">
-                <div class="chart-wrapper">
-                    <canvas id="canvas-virksomhet" class="chartjs-render-monitor"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End statOrgTypes -->
-
-    `;
+for (var i = 0; i < countedOrgTypes.count.length; i++) {
+    dummy = dummy + '<div onclick="filterByOrgType(countedOrgTypes.organization_type[';
+    dummy = dummy + i;
+    dummy = dummy + '])" class="col-sm-12 col-md mb-sm-2 mb-0">';
+    dummy = dummy + '<i class="fa fa-';
+    dummy = dummy + getOrgTypeIcon(countedOrgTypes.organization_type[i]);
+    dummy = dummy + ' fa-lg mt-4"> </i>';
+    dummy = dummy + ' <div class="text-muted">';
+    dummy = dummy + countedOrgTypes.organization_type[i];
+    dummy = dummy + '</div>';
+    dummy = dummy + '<strong>';
+    dummy = dummy + countedOrgTypes.count[i];
+    dummy = dummy + '</strong>';
+    dummy = dummy + '</div>';
+}
+dummy = dummy + "</div> "
+document.getElementById("displayOrgTypes").innerHTML = dummy;
 
 }
 
 
-/** displayMemberCards display all members in the 
- * array globalMembers
- * 
- */
 
-/*function displayMemberCards() {
-
-    document.getElementById("app").innerHTML = `
-    <!-- start cards -->
-    <div class="row">
-    ${globalMembers.map(memberTemplateCard).join("")}
-    </div>
-    </div>
-    <!-- End cards -->
-
-    `;
-
-}*/
 
 function displayMemberCards() {
 
@@ -1871,105 +1860,38 @@ function countDistinctSegmentTypes(){
 
 }
 
-/*** countDistinctOrgTypes
- *  globalMembers
- * https://jsfiddle.net/u1szh96g/2588/
- * 
-*/
+
+
+/** countDistinctOrgTypes
+ * Count the different org types so that it can be displayed in chartjs
+ * Thanks to Andreas Can Atakan for this rewrite.
+ */
+
 function countDistinctOrgTypes(){
 
-/*   ramblings for testing
+    // Testing a new approch
 
-const counts = Object.create(null);
-    buttons.forEach(btn => {
-      counts[btn] = counts[btn] ? counts[btn] + 1 : 1;
-    });
-
-const seen = Object.create(null);
-buttons.forEach(btn => {
-  seen[btn] = true;
-});
-
-
-    var distinctOrgTypes = Object.create(null);
-    orgTypes.forEach(x => {
-        distinctOrgTypes[x]  = true;
-    });
-
-
-    console.log(JSON.stringify(mycountedOrgTypes, 0, 4));
-// end ramblings
-
-
-// first version - not usig lodash
-*/
     const allOrgTypes = globalMembers.map(x => x.organization_type); // create an array of all organization_type
+
     var countedOrgTypesKeypair = Object.create(null);
-    
+    countedOrgTypes = {organization_type: [], count: [] }; //reset the array containing the results
 
-
-    countedOrgTypes = {organization_type: [], count: [] } ; //reset the array containing the results
-    
-
-
-    // counts the different org types- but make it in a key pair array
-    allOrgTypes.forEach(org => {
-        countedOrgTypesKeypair[org] = countedOrgTypesKeypair[org] ? countedOrgTypesKeypair[org] + 1 : 1;
-    });
-
-    // transform the key pair to a structure that can be used by chart.js
-    for (var key in countedOrgTypesKeypair) {     // For each item in your object
-        countedOrgTypes.organization_type.push(key);
-        // ... and the value as a new data
-        countedOrgTypes.count.push(countedOrgTypesKeypair[key]);
+    // Counting all unique org types.
+    for(var i = 0; i < allOrgTypes.length; i++) {
+      countedOrgTypesKeypair[allOrgTypes[i]] = 1 + (countedOrgTypesKeypair[allOrgTypes[i]] || 0);
     }
 
-
-  //  console.log(JSON.stringify(countedOrgTypes, 0, 4));
-
-
-/* using lodash - this is probably how it should be done, but my output is: 
-
-[
-    {
-        "organization_type": "private",
-        "count": 5
-    },
-    {
-        "organization_type": "startup",
-        "count": 1
+    // Transforming the data by adding all key strings to the organization_type array
+    // and all values to count array
+    for(var key in countedOrgTypesKeypair) {
+      countedOrgTypes["organization_type"].push(key);
+      countedOrgTypes["count"].push(countedOrgTypesKeypair[key]);
     }
-]
 
-It should be
-{
-    "organization_type": [
-        "private",
-        "startup"
-    ],
-    "count": [
-        5,
-        1
-    ]
-}
-//https://stackoverflow.com/questions/37347714/lodash-count-unique-of-field
-
-
-    var mycountedOrgTypes = _(globalMembers)
-        .groupBy('organization_type')
-        .map((items, organization_type) => ({ organization_type, count: items.length }))
-        .value();
-console.log(JSON.stringify(mycountedOrgTypes, 0, 4));
-*/
 
 
 
 }
-
-
-
-
-
 
 var myAPIkey = ""; // TODO: figure out how to set this a secure way
 var ckanServer = "http://data.urbalurba.com/"; // change to your own 
@@ -2020,6 +1942,7 @@ function loadOrganizationsFromCKAN2() {
             countDistinctOrgTypes(); // Count the number of different org types
             countDistinctSegmentTypes(); // Count the number of different segment types
             statistics(); //Display updated statistics
+            displayOrgTypes(); //display the different org types and their count
 
         })
         .catch(function (error) {
