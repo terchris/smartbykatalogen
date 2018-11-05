@@ -52,12 +52,7 @@ function filterByTag(tag, tagGroup){
             }
     
         });
-
-        $('#searchResponse')
-            .show('fast')
-            .find('h4').text('')
-                .append('Searching result by tag <strong>'+tag+'</strong>:');
-        $('#searchReset').show('fast');  
+        updateSearchStatus("Tag", tag);
 
     }
 }
@@ -84,7 +79,7 @@ function filterByOrgType(orgType){
 
             var theOrgType;
             theOrgType = $target.find('.fa.fa-'+ orgTypeIcon);
-            console.log(theOrgType[0]);
+            //console.log(theOrgType[0]);
             var lengden;
             lengden = theOrgType[0];
 
@@ -92,12 +87,25 @@ function filterByOrgType(orgType){
                     $target.attr('style','display:none !important');
                 }  
         });
+        updateSearchStatus("organization", orgType);
+
+    }
+}
+
+/*** updateSearchStatus
+ * Updates the status line of what has been searched for
+ * takes two parameters. 
+ */
+
+function updateSearchStatus(filtername, filtervalue) {
+
 
         $('#searchResponse')
             .show('fast')
-            .find('h4').text('')
-                .append('Searching result by organization <strong>'+orgType+'</strong>:');
+            .find('b').text('')
+                .append('Filtering by ' + filtername + ' : '+filtervalue);
         $('#searchReset').show('fast');  
 
-    }
+
+
 }
