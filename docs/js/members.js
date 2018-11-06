@@ -5,8 +5,8 @@
  */
 function tags(tags, statement) {
 
-// tracking: that a tag is clicked
-//onclick="analytics.track('Tag click', {tag_family: statement,tag: member.tag.trim()});"
+    // tracking: that a tag is clicked
+    //onclick="analytics.track('Tag click', {tag_family: statement,tag: member.tag.trim()});"
 
     return `
     ${tags.map(tag => ` <li><a href="#" class="tag-link" onclick="analytics.track('Tag click', {tag_family: statement,tag: member.tag.trim()});" data-statement="${statement}">${tag.trim()}</a></li> `).join("")}
@@ -114,7 +114,7 @@ function getOrgTypeIcon(orgType) {
     const civilsociety_ngoIcon = 'group';
     const academiaIcon = 'graduation-cap';
     const researchIcon = 'flask';
-    
+
     const defaultIcon = 'support';
 
     var icon = '';
@@ -176,7 +176,7 @@ function orgType(orgType) {
     const civilsociety_ngoIcon = 'group';
     const academiaIcon = 'graduation-cap';
     const researchIcon = 'flask';
-    
+
     const defaultIcon = 'support';
 
     var icon = '';
@@ -546,23 +546,23 @@ function readSBNnetworkInfo_axios(member) {
             `;
     } else {
         // First call. Read it from server
-        const ckanURLgetDataset = "api/3/action/datastore_search?resource_id="+ SBNnetworkInfo_resource_id;
+        const ckanURLgetDataset = "api/3/action/datastore_search?resource_id=" + SBNnetworkInfo_resource_id;
 
         var ckanURL = ckanServer + ckanURLgetDataset;
-    
+
         axios.get(ckanURL, { crossdomain: true })
-        .then(function (response) {
-            globalSBNnetworkInfo = JSON.parse(JSON.stringify(response.data.result.records));
-            document.getElementById("SBNnetworkInfo_resource_id").innerHTML = `
+            .then(function (response) {
+                globalSBNnetworkInfo = JSON.parse(JSON.stringify(response.data.result.records));
+                document.getElementById("SBNnetworkInfo_resource_id").innerHTML = `
                 ${displayArticles(member)} 
             `;
-            //console.log("Articles read and displayed");
+                //console.log("Articles read and displayed");
 
-        })
-        .catch(function (error) {
-            mylog(mylogdiv, "datastore_search ERROR: " + JSON.stringify(error));
-            console.log("datastore_search ERROR: " + JSON.stringify(error));
-        });
+            })
+            .catch(function (error) {
+                mylog(mylogdiv, "datastore_search ERROR: " + JSON.stringify(error));
+                console.log("datastore_search ERROR: " + JSON.stringify(error));
+            });
 
     }
 }
@@ -655,7 +655,7 @@ function searching() {
         $targets.show();
         //debugger;
         var text = $(this).val().toLowerCase();
-        
+
         if (text) {
             $('#searchReset').show('fast');
             $targets.each(function () {
@@ -671,22 +671,22 @@ function searching() {
                 if (matches == 0) {
                     // $target.hide();
                     // fix for _display.scss -> .d-flex {display: flex !important;}
-                    $target.attr('style','display:none !important')
+                    $target.attr('style', 'display:none !important')
                 }
             });
 
             $overall = $targets.filter(':visible').length;
-            updateSearchStatus(text, 'Found '+ $overall);
-            if($overall === 0){
+            updateSearchStatus(text, 'Found ' + $overall);
+            if ($overall === 0) {
                 updateSearchStatus(text, 'No search results found');
 
             }
 
         } else {
-            $('#searchReset').hide('fast');  
-            updateSearchStatus(text, 'Found '+ $overall);
+            $('#searchReset').hide('fast');
+            updateSearchStatus(text, 'Found ' + $overall);
         }
-        
+
     });
 
 }
@@ -851,24 +851,24 @@ function readEmployees_axios(member) {
         if (member.hasOwnProperty('employee_resource_id')) { // there is a property
             if (isValidResource(member.employee_resource_id)) { // and the member has a valid pointer to a dataset resource
 
-                const ckanURLgetDataset = "api/3/action/datastore_search?resource_id="+ member.employee_resource_id;
+                const ckanURLgetDataset = "api/3/action/datastore_search?resource_id=" + member.employee_resource_id;
 
                 var ckanURL = ckanServer + ckanURLgetDataset;
 
                 axios.get(ckanURL, { crossdomain: true })
-                .then(function (response) {
-                    member.employees = JSON.parse(JSON.stringify(response.data.result.records));     // copy the employees array to the member 
-                    // we must attach to the div id employees the first time because it has taken time to fetch the employees
-                    document.getElementById("employees").innerHTML = `
+                    .then(function (response) {
+                        member.employees = JSON.parse(JSON.stringify(response.data.result.records));     // copy the employees array to the member 
+                        // we must attach to the div id employees the first time because it has taken time to fetch the employees
+                        document.getElementById("employees").innerHTML = `
                         ${displayEmployeesSidebar(member)} 
                     `;
-        
-                })
-                .catch(function (error) {
-                    console.log("readEmployees ERROR: " + JSON.stringify(error));
-                    mylog(mylogdiv, "readEmployees ERROR: " + JSON.stringify(error)); 
-                });
-                
+
+                    })
+                    .catch(function (error) {
+                        console.log("readEmployees ERROR: " + JSON.stringify(error));
+                        mylog(mylogdiv, "readEmployees ERROR: " + JSON.stringify(error));
+                    });
+
 
             } else
                 if (member.employee_resource_id != "") //No valid resource id
@@ -1304,9 +1304,9 @@ function getMembersDummyData() {
     ];
 
 
-/*
-
-*/
+    /*
+    
+    */
 
 
 }
@@ -1334,28 +1334,28 @@ function doLogin() {
  *  var countedOrgTypes = {organization_type: [], count: [] }
  * onclick="filterByOrgType(countedOrgTypes.organization_type[i])"
  */
-function displayOrgTypes(){
-var dummy = "";
-getOrgTypeIcon(orgType)
-dummy = '<div class="row text-center">';
+function displayOrgTypes() {
+    var dummy = "";
 
-for (var i = 0; i < countedOrgTypes.count.length; i++) {
-    dummy = dummy + '<div onclick="filterByOrgType(countedOrgTypes.organization_type[';
-    dummy = dummy + i;
-    dummy = dummy + '])" class="col-sm-12 col-md mb-sm-2 mb-0">';
-    dummy = dummy + '<i class="fa fa-';
-    dummy = dummy + getOrgTypeIcon(countedOrgTypes.organization_type[i]);
-    dummy = dummy + ' fa-lg mt-4"> </i>';
-    dummy = dummy + ' <div class="text-muted">';
-    dummy = dummy + countedOrgTypes.organization_type[i];
-    dummy = dummy + '</div>';
-    dummy = dummy + '<strong>';
-    dummy = dummy + countedOrgTypes.count[i];
-    dummy = dummy + '</strong>';
-    dummy = dummy + '</div>';
-}
-dummy = dummy + "</div> "
-document.getElementById("displayOrgTypes").innerHTML = dummy;
+    dummy = '<div class="row ">';
+
+    for (var i = 0; i < countedOrgTypes.count.length; i++) {
+        dummy = dummy + '<div onclick="filterByOrgType(countedOrgTypes.organization_type[';
+        dummy = dummy + i;
+        dummy = dummy + '])" class="col-sm-12 col-md mb-sm-2 mb-0">';
+        dummy = dummy + '<i class="fa fa-';
+        dummy = dummy + getOrgTypeIcon(countedOrgTypes.organization_type[i]);
+        dummy = dummy + ' fa-lg mt-4"> </i>';
+        dummy = dummy + ' <div class="text-muted">';
+        dummy = dummy + countedOrgTypes.organization_type[i];
+        dummy = dummy + '</div>';
+        dummy = dummy + '<strong>';
+        dummy = dummy + countedOrgTypes.count[i];
+        dummy = dummy + '</strong>';
+        dummy = dummy + '</div>';
+    }
+    dummy = dummy + "</div> "
+    document.getElementById("displayOrgTypes").innerHTML = dummy;
 
 }
 
@@ -1387,19 +1387,19 @@ function displayMemberOverlay(member_id) {
     analytics.track('Display member', {
         ckan_name: member.name,
         display_name: member.display_name
-      });
+    });
 
-/****  
-    TODO: this stuff is about setting the url and handling back button. Not done yet  
-    // change page title to the member beeing displayed
-    var memberPageTitle = pageTitle + ": " + member.display_name;
-    document.title = memberPageTitle
-    var memberURL = "?name="  + member.name;
-    	
-    window.history.pushState('', memberPageTitle, memberURL); //TODO: handle back button
-
-    // TODO: change the og attributes $('meta[name="og:title"]').attr('content', pageTitle + ": " + member.display_name);
-*///
+    /****  
+        TODO: this stuff is about setting the url and handling back button. Not done yet  
+        // change page title to the member beeing displayed
+        var memberPageTitle = pageTitle + ": " + member.display_name;
+        document.title = memberPageTitle
+        var memberURL = "?name="  + member.name;
+        	
+        window.history.pushState('', memberPageTitle, memberURL); //TODO: handle back button
+    
+        // TODO: change the og attributes $('meta[name="og:title"]').attr('content', pageTitle + ": " + member.display_name);
+    *///
 
     document.getElementById("displayProfile").innerHTML = `
 
@@ -1510,7 +1510,7 @@ function displayMemberOverlay(member_id) {
 
 
                         <div class="widget widget--widget_meta">
-                            <h3 class="widget__title">Insightly Tags</h3>
+                            <h3 class="widget__title">Problem som løses</h3>
                             <div class="widget__content-NODEFINE">
                                 <ul>
                                     ${member.insightly_tags ? tags(member.insightly_tags, 'member-tags') : ""}
@@ -1537,7 +1537,7 @@ function displayMemberOverlay(member_id) {
 
            
            `;
-    
+
     $('#memberOverlay').modal('show');
 }
 
@@ -1546,19 +1546,19 @@ function displayMemberOverlay(member_id) {
  * called when member is closed
  * 
  */
-function closeMemberOverlay(name,display_name) {
+function closeMemberOverlay(name, display_name) {
     // This is not needed $('#memberOverlay').modal('hide');
-    
-/** TODO: handling back button
-    window.history.back();
 
-    document.title = pageTitle ; // change page title back to pageTitle
-***/        
+    /** TODO: handling back button
+        window.history.back();
+    
+        document.title = pageTitle ; // change page title back to pageTitle
+    ***/
     // tracking that we are closing a member
     analytics.track('Close member', {
         ckan_name: name,
         display_name: display_name
-      });
+    });
 
 
 }
@@ -1619,7 +1619,7 @@ function orgUpdateField(org_id, fieldName, fieldValue) {
         orange: 'rgb(255, 159, 64)',
         green: 'rgb(75, 192, 192)',
         purple: 'rgb(153, 102, 255)',
-        yellow: 'rgb(255, 205, 86)', 
+        yellow: 'rgb(255, 205, 86)',
         grey: 'rgb(201, 203, 207)'
     };
 }(this));
@@ -1632,7 +1632,7 @@ function statistics() {
         type: 'pie',
         data: {
             labels: countedOrgTypes.organization_type,
-            datasets: [{               
+            datasets: [{
                 data: countedOrgTypes.count,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
@@ -1656,8 +1656,12 @@ function statistics() {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                position: 'right'
+                position: 'bottom',
+                labels: {
+                    boxWidth: 10
+                }
             },
             onClick: function (event) {
                 var activePoints = virksomhetChart.getElementsAtEvent(event);
@@ -1665,22 +1669,22 @@ function statistics() {
                     var chartData = activePoints[0]['_chart'].config.data;
                     var idx = activePoints[0]['_index'];
                     var label = chartData.labels[idx];
-                    var txt = "Du klikket: " + label ;
+                    var txt = "Du klikket: " + label;
                     //console.log(txt);
                     //alert(txt);
                     filterByOrgType(label);
                 }
 
-            } 
+            }
         }
     });
 
 
     var segmentChart = new Chart($('#canvas-segment'), {
-        type: 'bar',
+        type: 'horizontalBar',
         data: {
 
-            labels: countedSegmentTypes.segment ,
+            labels: countedSegmentTypes.segment,
             datasets: [{
                 data: countedSegmentTypes.count,
                 backgroundColor: "#00b0f0"
@@ -1688,8 +1692,31 @@ function statistics() {
         },
         options: {
 
+            scales: {
+                yAxes: [{
+                    barThickness: 10
+                }],
+            },
+            responsive: true,
+            maintainAspectRatio: false,
             legend: {
-                display: false
+                display: false,
+                labels: {
+                    boxWidth: 10
+                }
+            },
+
+            onClick: function (event) {
+                var activePoints = segmentChart.getElementsAtEvent(event);
+                if (activePoints[0]) {
+                    var chartData = activePoints[0]['_chart'].config.data;
+                    var idx = activePoints[0]['_index'];
+                    var label = chartData.labels[idx];
+                    var txt = "Du klikket: " + label;
+                    //console.log(txt);
+                    //alert(txt);
+                    filterByTag(label, tagGroup)
+                }
             }
         }
     });
@@ -1707,7 +1734,7 @@ function statistics() {
                     'rgba(255, 159, 64, 0.5)',
                     'rgba(75, 192, 192, 0.5)',
                     'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 205, 86, 0.5)', 
+                    'rgba(255, 205, 86, 0.5)',
                     'rgba(201, 203, 207, 0.5)'
                 ],
                 hoverBackgroundColor: [
@@ -1716,16 +1743,16 @@ function statistics() {
                     'rgba(255, 159, 64, 0.9)',
                     'rgba(75, 192, 192, 0.9)',
                     'rgba(153, 102, 255, 0.9)',
-                    'rgba(255, 205, 86, 0.9)', 
+                    'rgba(255, 205, 86, 0.9)',
                     'rgba(201, 203, 207, 0.9)'
                 ],
                 borderColor: [
-                    '#FF6384', 
-                    '#36A2EB', 
-                    'rgb(255, 159, 64)', 
-                    'rgb(75, 192, 192)', 
+                    '#FF6384',
+                    '#36A2EB',
+                    'rgb(255, 159, 64)',
+                    'rgb(75, 192, 192)',
                     'rgb(153, 102, 255)',
-                    'rgb(255, 205, 86)', 
+                    'rgb(255, 205, 86)',
                     'rgb(201, 203, 207)'
                 ],
                 borderWidth: 1
@@ -1737,21 +1764,21 @@ function statistics() {
             },
             tooltips: {
                 callbacks: {
-                  label: function(tooltipItem) {
-                    return tooltipItem.yLabel;
+                    label: function (tooltipItem) {
+                        return tooltipItem.yLabel;
+                    }
                 }
-              }
             },
             responsive: true,
             scales: {
                 xAxes: [{
                     display: false //this will remove all the x-axis grid lines
-              }]
+                }]
             },
             autoSkip: false,
-            axisY:{
+            axisY: {
                 labelFontSize: 20,
-              },
+            },
         },
     });
 
@@ -1810,25 +1837,25 @@ function loginStatus() {
  * 
  * 
  */
-function countDistinctSegmentTypes(){
+function countDistinctSegmentTypes() {
 
-/* ramblings 
-    allSegmentTypes.forEach(segmArray => {
-        segmArray.forEach(segments => {
-            flatSegmentArray.push(segments);
-        }
-    });
-
-* end ramblings */
+    /* ramblings 
+        allSegmentTypes.forEach(segmArray => {
+            segmArray.forEach(segments => {
+                flatSegmentArray.push(segments);
+            }
+        });
+    
+    * end ramblings */
 
 
 
     const allSegmentTypes = globalMembers.map(x => x.segment); // create an array of all organization_type
 
     //console.log(JSON.stringify(allSegmentTypes, 0, 4));
-    var flatSegmentArray = []; 
+    var flatSegmentArray = [];
 
-// old school looping - lodash kandidate
+    // old school looping - lodash kandidate
     for (var i = 0; i < allSegmentTypes.length; i++) {
         var segmetSegmentArray = allSegmentTypes[i];
         // if no array skip else loop it 
@@ -1843,10 +1870,10 @@ function countDistinctSegmentTypes(){
         countedSermentTypesKeypair[segment] = countedSermentTypesKeypair[segment] ? countedSermentTypesKeypair[segment] + 1 : 1;
     });
 
-   // console.log(JSON.stringify(countedSermentTypesKeypair, 0, 4));
-   // console.log(JSON.stringify(countedSermentTypesKeypair));
+    // console.log(JSON.stringify(countedSermentTypesKeypair, 0, 4));
+    // console.log(JSON.stringify(countedSermentTypesKeypair));
 
-    countedSegmentTypes = {segment: [], count: [] } ; //reset before counting
+    countedSegmentTypes = { segment: [], count: [] }; //reset before counting
 
     // transform the key pair to a structure that can be used by chart.js
     for (var key in countedSermentTypesKeypair) {     // For each item in your object
@@ -1855,7 +1882,7 @@ function countDistinctSegmentTypes(){
         countedSegmentTypes.count.push(countedSermentTypesKeypair[key]);
     }
 
-   //console.log(JSON.stringify(countedSegmentTypes, 0, 4));
+    //console.log(JSON.stringify(countedSegmentTypes, 0, 4));
 
 
 }
@@ -1867,25 +1894,25 @@ function countDistinctSegmentTypes(){
  * Thanks to Andreas Can Atakan for this rewrite.
  */
 
-function countDistinctOrgTypes(){
+function countDistinctOrgTypes() {
 
     // Testing a new approch
 
     const allOrgTypes = globalMembers.map(x => x.organization_type); // create an array of all organization_type
 
     var countedOrgTypesKeypair = Object.create(null);
-    countedOrgTypes = {organization_type: [], count: [] }; //reset the array containing the results
+    countedOrgTypes = { organization_type: [], count: [] }; //reset the array containing the results
 
     // Counting all unique org types.
-    for(var i = 0; i < allOrgTypes.length; i++) {
-      countedOrgTypesKeypair[allOrgTypes[i]] = 1 + (countedOrgTypesKeypair[allOrgTypes[i]] || 0);
+    for (var i = 0; i < allOrgTypes.length; i++) {
+        countedOrgTypesKeypair[allOrgTypes[i]] = 1 + (countedOrgTypesKeypair[allOrgTypes[i]] || 0);
     }
 
     // Transforming the data by adding all key strings to the organization_type array
     // and all values to count array
-    for(var key in countedOrgTypesKeypair) {
-      countedOrgTypes["organization_type"].push(key);
-      countedOrgTypes["count"].push(countedOrgTypesKeypair[key]);
+    for (var key in countedOrgTypesKeypair) {
+        countedOrgTypes["organization_type"].push(key);
+        countedOrgTypes["count"].push(countedOrgTypesKeypair[key]);
     }
 
 
@@ -1918,8 +1945,8 @@ const pageTitle = "Smartbykatalogen";   // page title for web page
 document.title = pageTitle; //set it
 
 
-var countedOrgTypes = {organization_type: [], count: [] } ; // This is where we place each distinct organization_type and the count for each organization_type 
-var countedSegmentTypes = {segmenttype: [], count: [] } ; // This is where we place each distinct organization_type and the count for each organization_type 
+var countedOrgTypes = { organization_type: [], count: [] }; // This is where we place each distinct organization_type and the count for each organization_type 
+var countedSegmentTypes = { segmenttype: [], count: [] }; // This is where we place each distinct organization_type and the count for each organization_type 
 
 
 
@@ -1965,8 +1992,8 @@ function loadOrganizationsFromCKAN2() {
     //countDistinctOrgTypes(); // Count the number of different org types
     //countDistinctSegmentTypes(); // Count the number of different segment types
     //statistics();
-    
-    
+
+
 
 
 
