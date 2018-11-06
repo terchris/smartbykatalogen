@@ -589,9 +589,9 @@ function memberTemplateCard(member) {
                         <div class="collapse" id="collapse-${member.name}">
                             <p class="card-text">${member.description}</p>
                             <p class="card-member-tags">${member.member_tags}</p>
-                            <p class="card-member-tags">${member.segment}</p>
+                            <p class="card-segment-tags">${member.segment}</p>
                             <p class="card-development-goals">${member.sustainable_development_goals}</p>
-                            <p class="card-member-tags">${member.insightly_tags}</p>
+                            <p class="card-problem-tags">${member.insightly_tags}</p>
                         </div>
                         <div class="card-tags mt-2">
                             ${member.organization_type ? orgType(member.organization_type) : ""}
@@ -612,9 +612,9 @@ function memberTemplateCard(member) {
                         <div class="collapse" id="collapse-${member.name}">
                             <p class="card-text">${member.description}</p>
                             <p class="card-member-tags">${member.member_tags}</p>
-                            <p class="card-segment">${member.segment}</p>
+                            <p class="card-segment-tags">${member.segment}</p>
                             <p class="card-development-goals">${member.sustainable_development_goals}</p>
-                            <p class="card-insightly-tags">${member.insightly_tags}</p>
+                            <p class="card-problem-tags">${member.insightly_tags}</p>
                         </div>
 
                     <div class="card-tags mt-4">
@@ -1490,7 +1490,7 @@ function displayMemberOverlay(member_id) {
 
                             <div class="widget__content-NODEFINE">
                                 <ul>
-                                    ${member.segment ? tags(member.segment, 'member-tags') : ""}
+                                    ${member.segment ? tags(member.segment, 'segment-tags') : ""}
                                 </ul>    
                             </div>                                
                         </div>
@@ -1513,7 +1513,7 @@ function displayMemberOverlay(member_id) {
                             <h3 class="widget__title">Problem som løses</h3>
                             <div class="widget__content-NODEFINE">
                                 <ul>
-                                    ${member.insightly_tags ? tags(member.insightly_tags, 'member-tags') : ""}
+                                    ${member.insightly_tags ? tags(member.insightly_tags, 'problem-tags') : ""}
                                 </ul>    
                             </div>                                
                         </div>
@@ -1715,7 +1715,7 @@ function statistics() {
                     var txt = "Du klikket: " + label;
                     //console.log(txt);
                     //alert(txt);
-                    filterByTag(label, tagGroup)
+                    filterByTag(label, "segment-tags")
                 }
             }
         }
@@ -1723,63 +1723,44 @@ function statistics() {
 
 
     var sustainable_development_goalsChart = new Chart($('#canvas-sustainable_development_goals'), {
-        type: 'bar',
+        type: 'horizontalBar',
         data: {
-            labels: ['1 Utrydde fattigdom', '2 Utrydde sult', '3 God helse', '4 God utdanning', '5 Likestilling mellom kjønnene', '6 Rent vann og gode sanitærforhold', '7 Ren energi for alle'],
+
+            labels: countedGlobaldevTypes.globaldev_type,
             datasets: [{
-                data: [5, 23, 11, 2, 22, 17, 54],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 205, 86, 0.5)',
-                    'rgba(201, 203, 207, 0.5)'
-                ],
-                hoverBackgroundColor: [
-                    'rgba(255, 99, 132, 0.9)',
-                    'rgba(54, 162, 235, 0.9)',
-                    'rgba(255, 159, 64, 0.9)',
-                    'rgba(75, 192, 192, 0.9)',
-                    'rgba(153, 102, 255, 0.9)',
-                    'rgba(255, 205, 86, 0.9)',
-                    'rgba(201, 203, 207, 0.9)'
-                ],
-                borderColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    'rgb(255, 159, 64)',
-                    'rgb(75, 192, 192)',
-                    'rgb(153, 102, 255)',
-                    'rgb(255, 205, 86)',
-                    'rgb(201, 203, 207)'
-                ],
-                borderWidth: 1
+                data: countedGlobaldevTypes.count,
+                backgroundColor: "#00b0f0"
             }]
         },
         options: {
-            legend: {
-                display: false
-            },
-            tooltips: {
-                callbacks: {
-                    label: function (tooltipItem) {
-                        return tooltipItem.yLabel;
-                    }
-                }
+
+            scales: {
+                yAxes: [{
+                    barThickness: 10
+                }],
             },
             responsive: true,
-            scales: {
-                xAxes: [{
-                    display: false //this will remove all the x-axis grid lines
-                }]
+            maintainAspectRatio: false,
+            legend: {
+                display: false,
+                labels: {
+                    boxWidth: 10
+                }
             },
-            autoSkip: false,
-            axisY: {
-                labelFontSize: 20,
-            },
-        },
+
+            onClick: function (event) {
+                var activePoints = sustainable_development_goalsChart.getElementsAtEvent(event);
+                if (activePoints[0]) {
+                    var chartData = activePoints[0]['_chart'].config.data;
+                    var idx = activePoints[0]['_index'];
+                    var label = chartData.labels[idx];
+                    var txt = "Du klikket: " + label;
+                    //console.log(txt);
+                    //alert(txt);
+                    filterByTag(label, "development-goals")
+                }
+            }
+        }
     });
 
 
@@ -1832,6 +1813,55 @@ function loginStatus() {
 }
 
 
+/**
+ * countDistinctGlobaldevTypes 
+ * 
+ */
+function countDistinctGlobaldevTypes(){
+
+    countedGlobaldevTypes = { globaldev_type: [], count: [] }; //reset before counting
+    const allGlobaldevTypes = globalMembers.map(x => x.sustainable_development_goals); // create an array of all global development types
+
+    //console.log(JSON.stringify(allGlobaldevTypes, 0, 4));
+    var flatGlobaldevArray = [];
+
+    // old school looping - lodash kandidate
+    for (var i = 0; i < allGlobaldevTypes.length; i++) {
+        var GlobaldevGlobaldevArray = allGlobaldevTypes[i];
+        // if no array skip else loop it 
+        for (var j = 0; j < GlobaldevGlobaldevArray.length; j++) {
+            flatGlobaldevArray.push(GlobaldevGlobaldevArray[j]);
+        }
+    }
+
+    var countedGlobaldevTypesKeypair = Object.create(null);
+    // counts the different Globaldev types- but make it in a key pair array
+    flatGlobaldevArray.forEach(globaldev_type => {
+        countedGlobaldevTypesKeypair[globaldev_type] = countedGlobaldevTypesKeypair[globaldev_type] ? countedGlobaldevTypesKeypair[globaldev_type] + 1 : 1;
+    });
+
+    // console.log(JSON.stringify(countedGlobaldevTypesKeypair, 0, 4));
+    // console.log(JSON.stringify(countedGlobaldevTypesKeypair));
+
+    
+
+    // transform the key pair to a structure that can be used by chart.js
+    for (var key in countedGlobaldevTypesKeypair) {     // For each item in your object
+        countedGlobaldevTypes.globaldev_type.push(key);
+        // ... and the value as a new data
+        countedGlobaldevTypes.count.push(countedGlobaldevTypesKeypair[key]);
+    }
+
+    console.log(JSON.stringify(countedGlobaldevTypes, 0, 4));
+
+
+
+
+
+
+
+}
+
 
 /*** countDistinctSegmentTypes
  * 
@@ -1839,18 +1869,9 @@ function loginStatus() {
  */
 function countDistinctSegmentTypes() {
 
-    /* ramblings 
-        allSegmentTypes.forEach(segmArray => {
-            segmArray.forEach(segments => {
-                flatSegmentArray.push(segments);
-            }
-        });
-    
-    * end ramblings */
 
 
-
-    const allSegmentTypes = globalMembers.map(x => x.segment); // create an array of all organization_type
+    const allSegmentTypes = globalMembers.map(x => x.segment); // create an array of all segment_type
 
     //console.log(JSON.stringify(allSegmentTypes, 0, 4));
     var flatSegmentArray = [];
@@ -1915,9 +1936,6 @@ function countDistinctOrgTypes() {
         countedOrgTypes["count"].push(countedOrgTypesKeypair[key]);
     }
 
-
-
-
 }
 
 var myAPIkey = ""; // TODO: figure out how to set this a secure way
@@ -1946,8 +1964,8 @@ document.title = pageTitle; //set it
 
 
 var countedOrgTypes = { organization_type: [], count: [] }; // This is where we place each distinct organization_type and the count for each organization_type 
-var countedSegmentTypes = { segmenttype: [], count: [] }; // This is where we place each distinct organization_type and the count for each organization_type 
-
+var countedSegmentTypes = { segment_type: [], count: [] }; // This is where we place each distinct segment_type and the count for each segment_type 
+var countedGlobaldevTypes = { globaldev_type: [], count: [] }; // This is where we place each distinct globaldev_type and the count for each globaldev_type 
 
 
 
@@ -1968,6 +1986,7 @@ function loadOrganizationsFromCKAN2() {
             displayMemberCards(); // display the members fetched into globalMembers array                    
             countDistinctOrgTypes(); // Count the number of different org types
             countDistinctSegmentTypes(); // Count the number of different segment types
+            countDistinctGlobaldevTypes(); // Count the number of different global dev types
             statistics(); //Display updated statistics
             displayOrgTypes(); //display the different org types and their count
 
