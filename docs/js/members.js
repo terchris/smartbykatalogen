@@ -1337,6 +1337,7 @@ function doLogin() {
 function displayOrgTypes() {
     var dummy = "";
 
+/** DELETE     
     dummy = '<div class="row ">';
 
     for (var i = 0; i < countedOrgTypes.count.length; i++) {
@@ -1354,7 +1355,22 @@ function displayOrgTypes() {
         dummy = dummy + '</strong>';
         dummy = dummy + '</div>';
     }
-    dummy = dummy + "</div> "
+*/
+    dummy ='<ul class="nav">';
+    for (var i = 0; i < countedOrgTypes.count.length; i++) {
+        dummy = dummy + '<li class="nav-item">';
+        dummy = dummy + '<a class="nav-link" onclick="filterByOrgType(countedOrgTypes.organization_type[';
+        dummy = dummy + i;
+        dummy = dummy + '])">';
+        dummy = dummy + '<i class="fa fa-';
+        dummy = dummy + getOrgTypeIcon(countedOrgTypes.organization_type[i]);
+        dummy = dummy + ' fa-lg"> </i>';
+        dummy = dummy + '<span class="badge badge-pill badge-warning">';
+        dummy = dummy + countedOrgTypes.count[i];
+        dummy = dummy + '</span>';         
+        dummy = dummy + "</a> </li>";
+    }
+    dummy = dummy + "</ul> "
     document.getElementById("displayOrgTypes").innerHTML = dummy;
 
 }
@@ -1765,6 +1781,51 @@ function statistics() {
 
 
 
+    var problemChart = new Chart($('#canvas-problemSolved'), {
+        type: 'horizontalBar',
+        data: {
+
+            labels: countedProblemTypes.problem_type,
+            datasets: [{
+                data: countedProblemTypes.count,
+                backgroundColor: "#00b0f0"
+            }]
+        },
+        options: {
+
+            scales: {
+                yAxes: [{
+                    barThickness: 10
+                }],
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                display: false,
+                labels: {
+                    boxWidth: 10
+                }
+            },
+
+            onClick: function (event) {
+                var activePoints = problemChart.getElementsAtEvent(event);
+                if (activePoints[0]) {
+                    var chartData = activePoints[0]['_chart'].config.data;
+                    var idx = activePoints[0]['_index'];
+                    var label = chartData.labels[idx];
+                    var txt = "Du klikket: " + label;
+                    //console.log(txt);
+                    //alert(txt);
+                    filterByTag(label, "problem-tags")
+                }
+            }
+        }
+    });
+
+
+
+
+
 }
 
 
@@ -1813,6 +1874,53 @@ function loginStatus() {
 }
 
 
+
+
+/**
+ * countDistinctProblemTypes 
+ * 
+ */
+function countDistinctProblemTypes(){
+
+    countedProblemTypes = { problem_type: [], count: [] }; //reset before counting
+    const allProblemTypes = globalMembers.map(x => x.insightly_tags); // create an array of all problem types (insightly pags)
+
+    
+    var flatProblemArray = [];
+
+    // old school looping - lodash kandidate
+    for (var i = 0; i < allProblemTypes.length; i++) {
+        var ProblemProblemArray = allProblemTypes[i];
+        // if no array skip else loop it 
+        for (var j = 0; j < ProblemProblemArray.length; j++) {
+            flatProblemArray.push(ProblemProblemArray[j]);
+        }
+    }
+
+    var countedProblemTypesKeypair = Object.create(null);
+    // counts the different Globaldev types- but make it in a key pair array
+    flatProblemArray.forEach(problem_type => {
+        countedProblemTypesKeypair[problem_type] = countedProblemTypesKeypair[problem_type] ? countedProblemTypesKeypair[problem_type] + 1 : 1;
+    });
+
+    // transform the key pair to a structure that can be used by chart.js
+    for (var key in countedProblemTypesKeypair) {     // For each item in your object
+        countedProblemTypes.problem_type.push(key);
+        // ... and the value as a new data
+        countedProblemTypes.count.push(countedProblemTypesKeypair[key]);
+    }
+
+    console.log(JSON.stringify(countedProblemTypes, 0, 4));
+
+}
+
+
+
+
+
+
+
+
 /**
  * countDistinctGlobaldevTypes 
  * 
@@ -1852,13 +1960,7 @@ function countDistinctGlobaldevTypes(){
         countedGlobaldevTypes.count.push(countedGlobaldevTypesKeypair[key]);
     }
 
-    console.log(JSON.stringify(countedGlobaldevTypes, 0, 4));
-
-
-
-
-
-
+    //console.log(JSON.stringify(countedGlobaldevTypes, 0, 4));
 
 }
 
@@ -1966,7 +2068,7 @@ document.title = pageTitle; //set it
 var countedOrgTypes = { organization_type: [], count: [] }; // This is where we place each distinct organization_type and the count for each organization_type 
 var countedSegmentTypes = { segment_type: [], count: [] }; // This is where we place each distinct segment_type and the count for each segment_type 
 var countedGlobaldevTypes = { globaldev_type: [], count: [] }; // This is where we place each distinct globaldev_type and the count for each globaldev_type 
-
+var countedProblemTypes = { problem_type: [], count: [] }; // This is where we place each distinct problem_type and the count for each problem_type 
 
 
 /**
@@ -1987,9 +2089,10 @@ function loadOrganizationsFromCKAN2() {
             countDistinctOrgTypes(); // Count the number of different org types
             countDistinctSegmentTypes(); // Count the number of different segment types
             countDistinctGlobaldevTypes(); // Count the number of different global dev types
-            statistics(); //Display updated statistics
+            countDistinctProblemTypes(); // Count the number of different problem types
+            
             displayOrgTypes(); //display the different org types and their count
-
+            statistics(); //Display updated statistics
         })
         .catch(function (error) {
             mylog(mylogdiv, "organization_list ERROR: " + JSON.stringify(error));
