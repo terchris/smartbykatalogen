@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+
+div.mapcontainer
+{
+  height: 100vh;
+}
+
+
+img#organization_logo
+{
+  width: 100px;
+}
