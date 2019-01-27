@@ -26,9 +26,9 @@ var hash = MainMap.addLayer(title);
 
 
 // Fetching member data from query-url
-$.getJSON(url, (data, status) => {
-  if(status == "success" && data.success) {
-
+axios.get(url)
+  .then(function(response) {
+    var data = response.data;
     for(var urld of data.result) {
       if(urld.locationData) {
         // Replacing single quotes with double quotes, and parsing
@@ -48,8 +48,7 @@ $.getJSON(url, (data, status) => {
                                         hash);
       }
     }
-
-  }else{
-    alert("Error: could not reach url");
-  }
-});
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
