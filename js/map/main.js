@@ -15,7 +15,7 @@
 
 
 // Constructing the map in a HTML container with id = 'container'
-var MainMap = new Map("container", 0, 64, 13, 5);
+var MainMap = new Map("container", 5, 64, 13);
 
 
 // Defining query-url, layer title and layer id
@@ -35,7 +35,13 @@ axios.get(url)
         var latlng = JSON.parse(urld.locationData.replace(/\'/g, "\""));
 
         // Adding the member to the map by marker
-        var markerId = MainMap.addMarker(latlng.latlng.lat, latlng.latlng.lng, "https://image.flaticon.com/icons/svg/33/33622.svg"
+        // The 'addMarker' method takes the following parameters:
+        //    param1: latitude
+        //    param2: longitude
+        //    param3: popup HTML-content
+        //    param4: A reference to the marker icon (type: .png/.jpg/etc.)
+        //    param5: A list of all layers the marker should be added to
+        var markerId = MainMap.addMarker(latlng.latlng.lat, latlng.latlng.lng,
                                         `<h5><a href=\"${urld.website}\" target=\"_blank\">${urld.display_name}</a></h5>
                                           <img src=\"${urld.image_url}\" alt=\"\" id=\"organization_logo\">
                                           <p><b>type</b>: ${urld.organization_type}</p>
@@ -45,7 +51,7 @@ axios.get(url)
                                                             <a href=\"tel:${urld.contact_mobile}\" target=\"_blank\">${urld.contact_mobile}</a> <br>
                                                             <a href=\"mailto:${urld.contact_email}\" target=\"_blank\">${urld.contact_email}</a>
                                           </p>`,
-                                        hash);
+                                        "https://image.flaticon.com/icons/svg/33/33622.svg", [hash]);
       }
     }
   })
