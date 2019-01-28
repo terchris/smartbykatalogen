@@ -30,6 +30,26 @@
     </script>
 
 
+    <!--
+      Member-map scripts
+    -->
+    <!-- Leaflet CDN imports -->
+    <link rel="stylesheet" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" href="//unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <script integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin="" src="//unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+
+    <!-- Leaflet markercluster plugin CDN import -->
+  	<script type="text/javascript" crossorigin="" src="//unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+  	<link rel="stylesheet" crossorigin="" href="//unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+  	<link rel="stylesheet" crossorigin="" href="//unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+
+    <!-- Map-bundle scripts -->
+    <script type="text/javascript" src="js/map/bundle.js"></script>
+    <script type="text/javascript" src="js/map/main.js"></script>
+    <!--
+      /Member-map scripts
+    -->
+
+
     <!-- Squarespace header copy start. Paste to Settings - Advanced - PAGE HEADER CODE INJECTION-->
     <!-- Main styles for this application -->
     <link href="css/style.css" rel="stylesheet">
@@ -69,6 +89,16 @@
     <!--  TODO: NOT used
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 -->
+
+    <!--
+      Member-map styles
+    -->
+    <style>
+      img#organization_logo { width: 150px; }
+    </style>
+    <!--
+      /Member-map styles
+    -->
 
 </head>
 
@@ -263,14 +293,14 @@
                                 <a class="nav-link" href="#statisticProblemSolved" data-toggle="collapse">
                                     <i class="nav-icon icon-pencil"></i> Problemer</a>
                             </li>
-    
+
                             <li class="nav-item">
                                     <a class="nav-link" href="#statisticTagcloud" data-toggle="collapse">
                                         <i class="nav-icon icon-tag"></i> Tag cloud</a>
                                 </li>
                     <li class="nav-divider"></li>
                     <li class="nav-title">Prosjekter</li>
- 
+
 
                 </ul>
                 <div class="ps__rail-x" style="left: 0px; bottom: -765px;">
@@ -311,7 +341,7 @@
                         </div>
 
                         <div class="container" id="displayOrgTypes" style="margin-bottom:15px">
-                            <!-- row with org types -->                                
+                            <!-- row with org types -->
                             <span>Reading members and calculating :<i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
                         </div>
                     </div>
@@ -474,11 +504,10 @@
                         <div class="card-header-actions">
 
                             <a class="card-header-action btn-setting" href="#">
-                                <i class="fa fa-table"></i>
+                                <i class="fa fa-table" id="viewTable"></i>
                             </a>
-                            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseExample"
-                                aria-expanded="true">
-                                <i class="fa fa-map-marker  /i>"></i>
+                            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true">
+                                <i class="fa fa-map-marker" id="viewMap"></i>
                             </a>
 
                         </div>
@@ -488,6 +517,18 @@
             </div>
             <!-- This is where the javascrip loads its stuff -->
             <div class="container-fluid" id="app"></div>
+            <div class="container-fluid">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col">
+                              <div id="mapContainer" style="height: 700px; display: none;"></div>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+            </div>
 
 
         </main> <!-- /.main -->

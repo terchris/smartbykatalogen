@@ -1,7 +1,7 @@
 
 /**  tags Displays all tags on a organization as list items
  *   statment uses for search field
- * 
+ *
  */
 function tags(tags, statement) {
 
@@ -13,7 +13,7 @@ function tags(tags, statement) {
 `;
 }
 
-/* Writes text to a div - used for logging 
+/* Writes text to a div - used for logging
 Se global variable to false to stop logging or just remove the divTag*/
 function mylog(divTag, logTxt) {
     if (globalMyLog) {
@@ -302,21 +302,21 @@ function displayUserAvatars(users) {
             <!-- Start avatars -->
             <div class="avatars-stack mt-2">
 
-                ${users.map(users => ` 
+                ${users.map(users => `
                 <div class="avatar">
                 <a href="${users.userProfileURL}" data-toggle="tooltip" data-placement="top" title="${users.display_name} ${users.aboutdisplay}">
                     <img class="img-avatar" src="${users.profilepictureurl}" onerror="this.onerror=null;this.src='${avatarImageDefaut}';">
                     </a>
-                </div>  
+                </div>
             `).join("")}
-            </div>     
-            <!-- stop avatars --> 
+            </div>
+            <!-- stop avatars -->
 `;
 }
 
 /** displayMemberContactInfo
- * 
- * 
+ *
+ *
  */
 function displayMemberContactInfo(member) {
 
@@ -378,13 +378,13 @@ function displayMemberProfileCard(member) {
     return `
     <div class="card">
 
-    
-    <img class="card-img-top img-fluid" src="${member.image_display_url}" onerror="this.onerror=null;this.src='${organizationImageDefaut}';" alt="${member.display_name}">    
+
+    <img class="card-img-top img-fluid" src="${member.image_display_url}" onerror="this.onerror=null;this.src='${organizationImageDefaut}';" alt="${member.display_name}">
 
 
     <div class="card-body">
         <h4 class="card-title">${member.display_name}
-            ${member.organization_type ? orgType(member.organization_type) : ""} 
+            ${member.organization_type ? orgType(member.organization_type) : ""}
         </h4>
         <h6 class="card-subtitle mb-2 text-muted">${member.slogan}</h6>
 
@@ -411,7 +411,7 @@ function displayMemberTagsCard(member) {
         <div class="card-body">
             <ul>
                 ${member.tags ? tags(member.tags) : ""}
-            </ul>    
+            </ul>
         </div>
     </div>
     `;
@@ -431,7 +431,7 @@ function displayMemberDescriptionCard(member) {
         </div>
         <div class="card-body">
             <div class="list-group">
-                <div class="list-group-item">            
+                <div class="list-group-item">
                     ${member.description}
                 </div>
             </div>
@@ -445,7 +445,7 @@ function displayMemberDescriptionCard(member) {
 
 /**
  * Template for displaying an article inside a card
- * 
+ *
  */
 function articleTemplateCard(article) {
 
@@ -481,7 +481,7 @@ function articleTemplateCard(article) {
 /**
  * Displays all articles that are linked to a member
  * The link (id) is the member.name on the arganization
- * 
+ *
  */
 function displayArticles(member) {
 
@@ -491,10 +491,10 @@ function displayArticles(member) {
     return `
     <div class="container">
         <div class="row">
-            ${memberArticles.map(articleTemplateCard).join("")}       
-        </div>        
+            ${memberArticles.map(articleTemplateCard).join("")}
+        </div>
     </div>
-    
+
     `;
 
 }
@@ -503,13 +503,13 @@ function displayArticles(member) {
 
 /**
  * Read all articles in the dataset id SBNnetworkInfo_resource_id into the array globalSBNnetworkInfo
- *  If the articles are already in the globalSBNnetworkInfo array. Then the articles are displayed 
+ *  If the articles are already in the globalSBNnetworkInfo array. Then the articles are displayed
  */
 function readSBNnetworkInfo(member) {
 
     if (Array.isArray(globalSBNnetworkInfo)) { // the array is already read
         return `
-            ${displayArticles(member)} 
+            ${displayArticles(member)}
             `;
     } else {
         // First call. Read it from server
@@ -521,11 +521,11 @@ function readSBNnetworkInfo(member) {
 
                     mylog(mylogdiv, "SBNnetworkInfo_resource_id:" + SBNnetworkInfo_resource_id + "  ERROR: " + JSON.stringify(err));
                     console.log("SBNnetworkInfo_resource_id:" + SBNnetworkInfo_resource_id + "  ERROR: " + JSON.stringify(err));
-                } else // we have read the resource     
+                } else // we have read the resource
                 {
                     globalSBNnetworkInfo = result.result.records;
                     document.getElementById("SBNnetworkInfo_resource_id").innerHTML = `
-                        ${displayArticles(member)} 
+                        ${displayArticles(member)}
                     `;
                 }
 
@@ -536,13 +536,13 @@ function readSBNnetworkInfo(member) {
 
 /**
  * Read all articles in the dataset id SBNnetworkInfo_resource_id into the array globalSBNnetworkInfo
- *  If the articles are already in the globalSBNnetworkInfo array. Then the articles are displayed 
+ *  If the articles are already in the globalSBNnetworkInfo array. Then the articles are displayed
  */
 function readSBNnetworkInfo_axios(member) {
 
     if (Array.isArray(globalSBNnetworkInfo)) { // the array is already read
         return `
-            ${displayArticles(member)} 
+            ${displayArticles(member)}
             `;
     } else {
         // First call. Read it from server
@@ -554,7 +554,7 @@ function readSBNnetworkInfo_axios(member) {
             .then(function (response) {
                 globalSBNnetworkInfo = JSON.parse(JSON.stringify(response.data.result.records));
                 document.getElementById("SBNnetworkInfo_resource_id").innerHTML = `
-                ${displayArticles(member)} 
+                ${displayArticles(member)}
             `;
                 //console.log("Articles read and displayed");
 
@@ -581,7 +581,7 @@ function memberTemplateCard(member) {
             <div class="urbacard card card-body flex-fill card-accent-secondary mb-2">
                 <div class="row" style="margin: 0">
                 <div class="media text-center" style="width: 100%;">
-                    <img class="align-self-center mr-2" src="${member.image_display_url}" 
+                    <img class="align-self-center mr-2" src="${member.image_display_url}"
                     onerror="this.onerror=null;this.src='${organizationImageDefaut}';" alt="${member.display_name}">
                     <div class="media-body">
                         <h5 class="mt-0 mb-0">${member.display_name}</h5>
@@ -598,16 +598,16 @@ function memberTemplateCard(member) {
                             ${member.description.length > 50 ? ` <i class="icon-info"></i> ` : ""}
                             ${member.phone ? ` <i class="icon-phone"></i> ` : ""}
                             ${ ((isValidResource(member.employees)) || (Array.isArray(member.employees))) ? ` <i class="icon-people"></i> ` : ""}
-                            ${member.member_tags ? ` <i class="icon-tag"></i> ` : ""}              
-                            ${member.package_count > 0 ? ` <i class="fa fa-database"></i> ` : ""}   
-                        </div> 
+                            ${member.member_tags ? ` <i class="icon-tag"></i> ` : ""}
+                            ${member.package_count > 0 ? ` <i class="fa fa-database"></i> ` : ""}
+                        </div>
                     </div>
-               
+
                     <!--div class="col-xl-6 col-lg-12 col-md-12 col-sm-3 text-center">
                         <img class="img-fluid" src="${member.image_display_url}" onerror="this.onerror=null;this.src='${organizationImageDefaut}';" alt="${member.display_name}">
                     </div>
                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-9">
-                        <h5 class="card-title">${member.display_name}</h5>              
+                        <h5 class="card-title">${member.display_name}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">${member.slogan}</h6>
                         <div class="collapse" id="collapse-${member.name}">
                             <p class="card-text">${member.description}</p>
@@ -622,9 +622,9 @@ function memberTemplateCard(member) {
                         ${member.description.length > 50 ? ` <i class="icon-info"></i> ` : ""}
                         ${member.phone ? ` <i class="icon-phone"></i> ` : ""}
                         ${ ((isValidResource(member.employees)) || (Array.isArray(member.employees))) ? ` <i class="icon-people"></i> ` : ""}
-                        ${member.member_tags ? ` <i class="icon-tag"></i> ` : ""}              
-                        ${member.package_count > 0 ? ` <i class="fa fa-database"></i> ` : ""}   
-                     </div--> 
+                        ${member.member_tags ? ` <i class="icon-tag"></i> ` : ""}
+                        ${member.package_count > 0 ? ` <i class="fa fa-database"></i> ` : ""}
+                     </div-->
                     </div>
                 </div>
             </div>
@@ -636,14 +636,14 @@ function memberTemplateCard(member) {
 
 
 
-/* Connects the search to the searchbox 
+/* Connects the search to the searchbox
 * The must class must exist <input type="text" class="searchboxfield" placeholder="Search..." />
 * and must be loaded and ready before this function executes
 * The search is quite nifty. A target is set on the div that we want to seatch in.
 * the name of the target is urbacard
-* Important. In order not just hide, but also reorganize the output on the screen, 
+* Important. In order not just hide, but also reorganize the output on the screen,
 * the target must be set on the outer div that is to be removed.
-*     <div class="col-sm-6 col-md-4 urbacard"> 
+*     <div class="col-sm-6 col-md-4 urbacard">
 *       <div class="card">
 *
 * */
@@ -651,7 +651,7 @@ function memberTemplateCard(member) {
 function searching() {
     $('.searchboxfield').on('input', function () { // connect to the div named searchboxfield
         $('#searchResponse').find('h4').text('')
-        var $targets = $('.cardbox'); // 
+        var $targets = $('.cardbox'); //
         $targets.show();
         //debugger;
         var text = $(this).val().toLowerCase();
@@ -715,7 +715,7 @@ function isAdminUser(name) {
  * Used to display employees in sidebar
  */
 function employeeTemplateSidebar(employee) {
-    return `    
+    return `
     <!-- start employee -->
     <div class="list-group-item list-group-item-divider">
         <div class="avatar float-right">
@@ -729,7 +729,7 @@ function employeeTemplateSidebar(employee) {
             <small class="text-muted mr-3">
                 <i class="icon-screen-smartphone"></i> <a href="tel:${employee.mobil}"> ${employee.mobil}
             </small>
-    
+
             ${(employee.linkedin.length > 10) ? '<a href="${employee.twitter}" target="_blank"><small class="text-muted"><i class="icon-social-linkedin"></i></small></a> ' : ""}
 
             ${(employee.twitter.length > 10) ? '<a href="${employee.twitter}" target="_blank"><small class="text-muted"><i class="icon-social-twitter"></i></small></a> ' : ""}
@@ -748,7 +748,7 @@ function employeeTemplateSidebar(employee) {
 
 }
 
-/** employeeTemplateRow Displays employees in a row 
+/** employeeTemplateRow Displays employees in a row
  * NOT USED
  */
 function employeeTemplateRow(employee) {
@@ -756,7 +756,7 @@ function employeeTemplateRow(employee) {
 
     return `
     <!-- start employee -->
-    <div class="col-lg-4 col-sm-6 text-center mb-4">    
+    <div class="col-lg-4 col-sm-6 text-center mb-4">
         <img class="rounded-circle img-fluid d-block mx-auto" src="${employee.profilbilde}" onerror="this.onerror=null;this.src='${avatarImageDefaut}';" >
         <h3>${employee.fornavn} ${employee.etternavn}
             <small>${employee.tittel}</small>
@@ -770,7 +770,7 @@ function employeeTemplateRow(employee) {
             </small>
         </div>
 
-        
+
         <a href="${employee.linkedin}" target="_blank">
             <small class="text-muted mr-3">
                 <i class="icon-social-linkedin"></i>
@@ -781,7 +781,7 @@ function employeeTemplateRow(employee) {
             <small class="text-muted">
                 <i class="icon-social-twitter"></i>
             </small>
-        </a>      
+        </a>
     </div>
   <!-- end employee -->
     `;
@@ -791,7 +791,7 @@ function employeeTemplateRow(employee) {
 
 
 /** displayEmployeesSidebar
- * 
+ *
  */
 function displayEmployeesSidebar(member) {
 
@@ -799,7 +799,7 @@ function displayEmployeesSidebar(member) {
     return `
     <!-- start employees -->
     <div class="list-group">
-        ${member.employees.map(employeeTemplateSidebar).join("")}         
+        ${member.employees.map(employeeTemplateSidebar).join("")}
     </div>
   <!-- end employees -->
     `;
@@ -820,7 +820,7 @@ function displayEmployeesRow(member) {
         <h2 class="my-4">Team</h2>
         </div>
         ${member.employees.map(employeeTemplateRow).join("")}
-         
+
     </div>
   <!-- end employees -->
     `;
@@ -832,19 +832,19 @@ function displayEmployeesRow(member) {
 
 /** readEmployees reads all employees for the organisation
  * and adds it to the member object in the global array
- * the field member.employee_resource_id can contain a resource_id for the dataset that contains the employees 
- * If the member.employee_resource_id contains a valid resource id and it can be read then 
+ * the field member.employee_resource_id can contain a resource_id for the dataset that contains the employees
+ * If the member.employee_resource_id contains a valid resource id and it can be read then
  * the employees are read into the member.employees array
- * 
+ *
  * If this function has run before for the organisation, then the member.employees contains a array of all emplyees
  */
 function readEmployees_axios(member) {
 
-    if (member.hasOwnProperty('employees')) {   // if the field employees is present. 
+    if (member.hasOwnProperty('employees')) {   // if the field employees is present.
         if (Array.isArray(member.employees)) { // employees are already read into member object
             // when the employees are already in the array we can just output them
             return `
-                ${displayEmployeesSidebar(member)} 
+                ${displayEmployeesSidebar(member)}
             `;
         }
     } else // employees are not read
@@ -857,10 +857,10 @@ function readEmployees_axios(member) {
 
                 axios.get(ckanURL, { crossdomain: true })
                     .then(function (response) {
-                        member.employees = JSON.parse(JSON.stringify(response.data.result.records));     // copy the employees array to the member 
+                        member.employees = JSON.parse(JSON.stringify(response.data.result.records));     // copy the employees array to the member
                         // we must attach to the div id employees the first time because it has taken time to fetch the employees
                         document.getElementById("employees").innerHTML = `
-                        ${displayEmployeesSidebar(member)} 
+                        ${displayEmployeesSidebar(member)}
                     `;
 
                     })
@@ -891,7 +891,7 @@ function readEmployees_axios(member) {
 /*** Test if a resurce_id is valid.
 * A valid resource_id is llike this:
 * 88ad7fac-f90c-4ae2-ba01-bcceb1486137
-* Lenght = 36 
+* Lenght = 36
 *****/
 function isValidResource(resource_id) {
 
@@ -942,7 +942,7 @@ function tidyOrganizations(members) {
 
 
 
-        // handle the ckan users for the member org 
+        // handle the ckan users for the member org
         originalNumUsers = newMember.users.length; // count the original number
         delete newMember.users;  //delete the users
         let newUserArray = []; // we will copy all user that are not admin into this array
@@ -953,16 +953,16 @@ function tidyOrganizations(members) {
                 mylog(mylogdiv, "Admin user removed from : " + members[i].name) // not copied the admin user
 
             } else {
-                theUser = getExtendedUserProperties(members[i].users[usrcount]); // set the properties for the user           
+                theUser = getExtendedUserProperties(members[i].users[usrcount]); // set the properties for the user
                 newUserArray.push(theUser);            // and add it to the new list of users belonging to the org
             }
         }
         newMember.users = JSON.parse(JSON.stringify(newUserArray)); // seems to be the way one copies an array in javascript
 
-        newMember.member_tags = tagsToArray(newMember.member_tags); // convert to array and clean 
-        newMember.segment = tagsToArray(newMember.segment); // convert to array and clean 
-        newMember.insightly_tags = tagsToArray(newMember.insightly_tags); // convert to array and clean 
-        newMember.sustainable_development_goals = tagsToArray(newMember.sustainable_development_goals); // convert to array and clean 
+        newMember.member_tags = tagsToArray(newMember.member_tags); // convert to array and clean
+        newMember.segment = tagsToArray(newMember.segment); // convert to array and clean
+        newMember.insightly_tags = tagsToArray(newMember.insightly_tags); // convert to array and clean
+        newMember.sustainable_development_goals = tagsToArray(newMember.sustainable_development_goals); // convert to array and clean
 
         newMemberArray.push(newMember); // copy the organization. it is a member
         //        } else {
@@ -979,10 +979,10 @@ function tidyOrganizations(members) {
 
 
 /** getMembersDummyData
- * To avoid waiting for ckan server to return all members we just populate 
+ * To avoid waiting for ckan server to return all members we just populate
  * the screen with the first n member cards
- * 
- * The global array that holds members is globalMembers 
+ *
+ * The global array that holds members is globalMembers
  */
 function getMembersDummyData() {
 
@@ -1305,7 +1305,7 @@ function getMembersDummyData() {
 
 
     /*
-    
+
     */
 
 
@@ -1329,7 +1329,7 @@ function doLogin() {
 
 
 
-/*** displayOrgTypes 
+/*** displayOrgTypes
  * Displays the different org types and the count
  *  var countedOrgTypes = {organization_type: [], count: [] }
  * onclick="filterByOrgType(countedOrgTypes.organization_type[i])"
@@ -1337,7 +1337,7 @@ function doLogin() {
 function displayOrgTypes() {
     var dummy = "";
 
-/** DELETE     
+/** DELETE
     dummy = '<div class="row ">';
 
     for (var i = 0; i < countedOrgTypes.count.length; i++) {
@@ -1367,7 +1367,7 @@ function displayOrgTypes() {
         dummy = dummy + ' fa-lg"> </i>';
         dummy = dummy + '<span class="badge badge-pill badge-warning">';
         dummy = dummy + countedOrgTypes.count[i];
-        dummy = dummy + '</span>';         
+        dummy = dummy + '</span>';
         dummy = dummy + "</a> </li>";
     }
     dummy = dummy + "</ul> "
@@ -1405,15 +1405,15 @@ function displayMemberOverlay(member_id) {
         display_name: member.display_name
     });
 
-    /****  
-        TODO: this stuff is about setting the url and handling back button. Not done yet  
+    /****
+        TODO: this stuff is about setting the url and handling back button. Not done yet
         // change page title to the member beeing displayed
         var memberPageTitle = pageTitle + ": " + member.display_name;
         document.title = memberPageTitle
         var memberURL = "?name="  + member.name;
-        	
+
         window.history.pushState('', memberPageTitle, memberURL); //TODO: handle back button
-    
+
         // TODO: change the og attributes $('meta[name="og:title"]').attr('content', pageTitle + ": " + member.display_name);
     *///
 
@@ -1425,36 +1425,36 @@ function displayMemberOverlay(member_id) {
             <div class="col">
                 <div class="bg-white text-center">
                             <button type="button" class="close closebtn"  data-dismiss="modal" aria-label="Close" onclick="closeMemberOverlay('${member.name}','${member.display_name}');">
-                                <span aria-hidden="true">&times;</span>                                            
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         <img src="${member.image_display_url}" class="img-fluid" onerror="this.onerror=null;this.src='${organizationImageDefaut}';" alt="${member.display_name}">
                 </div>
             </div>
         </div>
 
-        
-        <div>    
+
+        <div>
             <div class="jumbotron no-margin" style="border-radius: 0;">
             <div class="row">
                 <div class="col text-center">
-                <!-- terchris: denne vises på mobil skjerm -->                               
+                <!-- terchris: denne vises på mobil skjerm -->
                     <h1 class="display-4">${member.display_name}</h1>
                     <p class="slogan">${member.slogan}</p>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
-    
+
 </section>
 
  <div class="container" style="background-color:white">
-        
+
         <!-- start middle section-->
-        
+
         <section class="modal-main-section">
 
             <div class="container">
-         
+
                 <div class="row">
                     <main class="col-md-12 col-lg-12 text-justify">
                         <div>
@@ -1465,17 +1465,17 @@ function displayMemberOverlay(member_id) {
                 <div class="row">
                     <main class="col-sm-12 col-lg-7" >
                         <!-- Start widgets-->
-                       
+
                             <div class="widget widget--widget_meta">
                                 <h3 class="widget__title">Kontakt info</h3>
-                                ${displayMemberContactInfo(member)} 
+                                ${displayMemberContactInfo(member)}
                             </div>
 
 
                             <div class="widget widget--widget_meta">
                                 <h3 class="widget__title">Kontaktpersoner</h3>
                                 <div id="employees">
-                                    ${readEmployees_axios(member)} 
+                                    ${readEmployees_axios(member)}
                                 </div>
                             </div>
 
@@ -1486,16 +1486,16 @@ function displayMemberOverlay(member_id) {
 
 
                         <div class="widget widget--widget_meta">
-                            
-                            <h3 class="widget__title">Member Tags</h3> 
+
+                            <h3 class="widget__title">Member Tags</h3>
                             <div onclick="editMemberTags('${member.id}','member_tags','Member Tags',)">
                                 <i class="fa fa-edit"></i>
                             </div>
                             <div class="widget__content-NODEFINE">
                                 <ul>
                                     ${member.member_tags ? tags(member.member_tags, 'member-tags') : ""}
-                                </ul>    
-                            </div> 
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="widget widget--widget_meta">
@@ -1507,8 +1507,8 @@ function displayMemberOverlay(member_id) {
                             <div class="widget__content-NODEFINE">
                                 <ul>
                                     ${member.segment ? tags(member.segment, 'segment-tags') : ""}
-                                </ul>    
-                            </div>                                
+                                </ul>
+                            </div>
                         </div>
                         <div class="widget widget--widget_meta">
                             <h3 class="widget__title">Sustainable Development Goals</h3>
@@ -1519,8 +1519,8 @@ function displayMemberOverlay(member_id) {
                             <div class="widget__content-NODEFINE">
                                 <ul>
                                     ${member.sustainable_development_goals ? tags(member.sustainable_development_goals, 'development-goals') : ""}
-                                </ul>    
-                            </div>                                
+                                </ul>
+                            </div>
                         </div>
 
 
@@ -1530,14 +1530,14 @@ function displayMemberOverlay(member_id) {
                             <div class="widget__content-NODEFINE">
                                 <ul>
                                     ${member.insightly_tags ? tags(member.insightly_tags, 'problem-tags') : ""}
-                                </ul>    
-                            </div>                                
+                                </ul>
+                            </div>
                         </div>
                     </main>
 
                     <main class="col-sm-12 col-lg-12" >
                         <div id="SBNnetworkInfo_resource_id">
-                                ${readSBNnetworkInfo_axios(member)}    
+                                ${readSBNnetworkInfo_axios(member)}
                             </div>
                         </div>
                     </main>
@@ -1551,7 +1551,7 @@ function displayMemberOverlay(member_id) {
 
     </div>
 
-           
+
            `;
 
     $('#memberOverlay').modal('show');
@@ -1560,14 +1560,14 @@ function displayMemberOverlay(member_id) {
 
 /**** closeMemberOverlay
  * called when member is closed
- * 
+ *
  */
 function closeMemberOverlay(name, display_name) {
     // This is not needed $('#memberOverlay').modal('hide');
 
     /** TODO: handling back button
         window.history.back();
-    
+
         document.title = pageTitle ; // change page title back to pageTitle
     ***/
     // tracking that we are closing a member
@@ -1586,7 +1586,7 @@ function closeMemberOverlay(name, display_name) {
  * value in parameter fieldValue
  * org_id is the id of the org to be updated.
  * Returns true if update was OK - false if not
- * 
+ *
  */
 function orgUpdateField(org_id, fieldName, fieldValue) {
 
@@ -1625,7 +1625,7 @@ function orgUpdateField(org_id, fieldName, fieldValue) {
 
 
 /** statistics
- * 
+ *
  */
 
 (function (global) {
@@ -1832,8 +1832,8 @@ function statistics() {
 
 /**
  * sets the status of login un the upper right corner.
- * 
- * 
+ *
+ *
  */
 function loginStatus() {
 
@@ -1864,7 +1864,7 @@ function loginStatus() {
     } else {
         document.getElementById("loginstatus").innerHTML = `
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginForm">Login
-        </button> 
+        </button>
                         `;
 
 
@@ -1877,21 +1877,21 @@ function loginStatus() {
 
 
 /**
- * countDistinctProblemTypes 
- * 
+ * countDistinctProblemTypes
+ *
  */
 function countDistinctProblemTypes(){
 
     countedProblemTypes = { problem_type: [], count: [] }; //reset before counting
     const allProblemTypes = globalMembers.map(x => x.insightly_tags); // create an array of all problem types (insightly pags)
 
-    
+
     var flatProblemArray = [];
 
     // old school looping - lodash kandidate
     for (var i = 0; i < allProblemTypes.length; i++) {
         var ProblemProblemArray = allProblemTypes[i];
-        // if no array skip else loop it 
+        // if no array skip else loop it
         for (var j = 0; j < ProblemProblemArray.length; j++) {
             flatProblemArray.push(ProblemProblemArray[j]);
         }
@@ -1922,8 +1922,8 @@ function countDistinctProblemTypes(){
 
 
 /**
- * countDistinctGlobaldevTypes 
- * 
+ * countDistinctGlobaldevTypes
+ *
  */
 function countDistinctGlobaldevTypes(){
 
@@ -1936,7 +1936,7 @@ function countDistinctGlobaldevTypes(){
     // old school looping - lodash kandidate
     for (var i = 0; i < allGlobaldevTypes.length; i++) {
         var GlobaldevGlobaldevArray = allGlobaldevTypes[i];
-        // if no array skip else loop it 
+        // if no array skip else loop it
         for (var j = 0; j < GlobaldevGlobaldevArray.length; j++) {
             flatGlobaldevArray.push(GlobaldevGlobaldevArray[j]);
         }
@@ -1951,7 +1951,7 @@ function countDistinctGlobaldevTypes(){
     // console.log(JSON.stringify(countedGlobaldevTypesKeypair, 0, 4));
     // console.log(JSON.stringify(countedGlobaldevTypesKeypair));
 
-    
+
 
     // transform the key pair to a structure that can be used by chart.js
     for (var key in countedGlobaldevTypesKeypair) {     // For each item in your object
@@ -1966,8 +1966,8 @@ function countDistinctGlobaldevTypes(){
 
 
 /*** countDistinctSegmentTypes
- * 
- * 
+ *
+ *
  */
 function countDistinctSegmentTypes() {
 
@@ -1981,7 +1981,7 @@ function countDistinctSegmentTypes() {
     // old school looping - lodash kandidate
     for (var i = 0; i < allSegmentTypes.length; i++) {
         var segmetSegmentArray = allSegmentTypes[i];
-        // if no array skip else loop it 
+        // if no array skip else loop it
         for (var j = 0; j < segmetSegmentArray.length; j++) {
             flatSegmentArray.push(segmetSegmentArray[j]);
         }
@@ -2041,7 +2041,7 @@ function countDistinctOrgTypes() {
 }
 
 var myAPIkey = ""; // TODO: figure out how to set this a secure way
-var ckanServer = "http://data.urbalurba.com/"; // change to your own 
+var ckanServer = "http://data.urbalurba.com/"; // change to your own
 //ckanServer = "http://172.16.1.96/"; //for testing on local ubuntu VM
 //ckanServer = "http://test.urbalurba.no/";
 
@@ -2051,7 +2051,7 @@ var avatarImageDefaut = "http://icons.iconarchive.com/icons/designbolts/free-mal
 var organizationImageDefaut = "http://bucket.urbalurba.com/logo/dummylogo.png";
 
 
-const SBNnetworkInfo_resource_id = "2b8ad5a8-e209-4d29-959d-0460a35c2343"; //for testing on local ubuntu VM 
+const SBNnetworkInfo_resource_id = "2b8ad5a8-e209-4d29-959d-0460a35c2343"; //for testing on local ubuntu VM
 let adminUsersToRemove = ["terchris"]; // the ckan main admin is usually a member. so remove that one
 
 // For logging to screen
@@ -2065,14 +2065,14 @@ const pageTitle = "Smartbykatalogen";   // page title for web page
 document.title = pageTitle; //set it
 
 
-var countedOrgTypes = { organization_type: [], count: [] }; // This is where we place each distinct organization_type and the count for each organization_type 
-var countedSegmentTypes = { segment_type: [], count: [] }; // This is where we place each distinct segment_type and the count for each segment_type 
-var countedGlobaldevTypes = { globaldev_type: [], count: [] }; // This is where we place each distinct globaldev_type and the count for each globaldev_type 
-var countedProblemTypes = { problem_type: [], count: [] }; // This is where we place each distinct problem_type and the count for each problem_type 
+var countedOrgTypes = { organization_type: [], count: [] }; // This is where we place each distinct organization_type and the count for each organization_type
+var countedSegmentTypes = { segment_type: [], count: [] }; // This is where we place each distinct segment_type and the count for each segment_type
+var countedGlobaldevTypes = { globaldev_type: [], count: [] }; // This is where we place each distinct globaldev_type and the count for each globaldev_type
+var countedProblemTypes = { problem_type: [], count: [] }; // This is where we place each distinct problem_type and the count for each problem_type
 
 
 /**
- * This is the starting function. It reads the organisations from CKAN 
+ * This is the starting function. It reads the organisations from CKAN
  * and displays the organizations/members as cards
  */
 function loadOrganizationsFromCKAN2() {
@@ -2085,14 +2085,17 @@ function loadOrganizationsFromCKAN2() {
 
             globalMembers = tidyOrganizations(response.data.result); // add and remove stuff
             //console.log(JSON.stringify(globalMembers));
-            displayMemberCards(); // display the members fetched into globalMembers array                    
+            displayMemberCards(); // display the members fetched into globalMembers array
             countDistinctOrgTypes(); // Count the number of different org types
             countDistinctSegmentTypes(); // Count the number of different segment types
             countDistinctGlobaldevTypes(); // Count the number of different global dev types
             countDistinctProblemTypes(); // Count the number of different problem types
-            
+
             displayOrgTypes(); //display the different org types and their count
             statistics(); //Display updated statistics
+
+            // initializing member-map
+            initMap("mapContainer", 5, 64, 13);
         })
         .catch(function (error) {
             mylog(mylogdiv, "organization_list ERROR: " + JSON.stringify(error));

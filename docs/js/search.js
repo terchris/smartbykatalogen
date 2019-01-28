@@ -1,7 +1,7 @@
-$(document).on('click', '.tag-link', function(){ 
+$(document).on('click', '.tag-link', function(){
     var tag = $(this).text(); //get the tag we are looking for
     var statement = $(this).attr('data-statement'); //Get the tag group eg. member tags, segment etc
-    $('#memberOverlay').modal('hide'); //hide the member overlay 
+    $('#memberOverlay').modal('hide'); //hide the member overlay
 
 
     filterByTag(tag, statement);
@@ -50,7 +50,7 @@ function filterByTag(tag, tagGroup){
                 // fix for _display.scss -> .d-flex {display: flex !important;}
                 $target.attr('style','display:none !important');
             }
-    
+
         });
         updateSearchStatus("Tag", tag);
 
@@ -70,6 +70,9 @@ function filterByOrgType(orgType){
     var $targets = $('.cardbox'); // select all cards
     $targets.show(); // display all cards
 
+    MainMap.activateLayer(orgType_hash[orgType]);
+    currentOrg = orgType;
+
     //debugger;
     if (orgType) {
         $targets.each(function () {
@@ -85,7 +88,7 @@ function filterByOrgType(orgType){
 
                 if (lengden == undefined) {
                     $target.attr('style','display:none !important');
-                }  
+                }
         });
         updateSearchStatus("organization", orgType);
 
@@ -94,7 +97,7 @@ function filterByOrgType(orgType){
 
 /*** updateSearchStatus
  * Updates the status line of what has been searched for
- * takes two parameters. 
+ * takes two parameters.
  */
 
 function updateSearchStatus(filtername, filtervalue) {
@@ -104,7 +107,7 @@ function updateSearchStatus(filtername, filtervalue) {
             .show('fast')
             .find('b').text('')
                 .append('Filtering by ' + filtername + ' : '+filtervalue);
-        $('#searchReset').show('fast');  
+        $('#searchReset').show('fast');
 
 
 
