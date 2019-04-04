@@ -29,9 +29,7 @@ function initMap(container, lat, lng, zoom) {
                         <p><b>type</b>: ${member.organization_type}</p>
                         <p><b>beskrivelse</b>: ${member.description}</p>
                         <p>
-                          <b>Kontakt:</b> ${member.contact_name} , ${member.contact_title} <br>
-                                          <a href=\"tel:${member.contact_mobile}\" target=\"_blank\">${member.contact_mobile}</a> <br>
-                                          <a href=\"mailto:${member.contact_email}\" target=\"_blank\">${member.contact_email}</a>
+                          <b>Kontakt:</b> ${member.contact_name} , ${member.contact_title}
                         </p>`,
                       "https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png", [orgType_hash[member.organization_type]]);
   }
