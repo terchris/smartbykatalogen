@@ -98,20 +98,22 @@
     * @param {number} lat The latitude value of the marker
     * @param {number} lng The longitude value of the marker
     * @param {string} popupCont The popup content of the marker should display
-    * @param {string} iconUrl The url to the marker icon
+    * @param {string} iconRef The url to the marker icon
+    * @param {string} iconColor The color to the marker icon
     * @param {Array<string>} layerIds A, possibly empty, list of id's. These are the id's of the layers that the maper is to be added to
     *
     * @return {string} The id of the new marker
     *
     * @throws An error if the layer type is not defined
     */
-    this.addMarker = function(lat, lng, popupCont, iconUrl, layerIds) {
-      var newIcon = L.icon({
-                      iconUrl: iconUrl,
-                      iconSize: [38, 95]
+    this.addMarker = function(lat, lng, popupCont, iconRef, iconColor, layerIds) {
+      var newIcon = L.AwesomeMarkers.icon({
+                      icon: iconRef,
+                      prefix: 'fa',
+                      markerColor: iconColor
                     }),
           hash = uuid();
-      var marker = L.marker([lat, lng]/*, {icon: newIcon}*/).bindPopup(popupCont);
+      var marker = L.marker([lat, lng], {icon: newIcon}).bindPopup(popupCont);
 
       marker.options.id = hash;
 

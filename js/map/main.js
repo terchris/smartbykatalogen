@@ -1,14 +1,18 @@
 var MainMap;
 var orgType_hash;
+var orgType_color;
 var currentOrg;
 
 function initMap(container, lat, lng, zoom) {
   MainMap = new Map(container, lat, lng, zoom);
   orgType_hash = {};
+  orgType_color = {};
+  var colors = ['darkblue', 'red', 'green', 'purple', 'grey', 'black', 'yellow'];
 
   for(var j = 0; j < countedOrgTypes.organization_type.length; j++) {
     var org = countedOrgTypes.organization_type[j];
     orgType_hash[org] = MainMap.addLayer(org);
+    orgType_color[org] = colors[j];
   }
 
   for(var i = 0; i < globalMembers.length; i++) {
@@ -33,7 +37,7 @@ function initMap(container, lat, lng, zoom) {
                                           <a href=\"tel:${member.contact_mobile}\" target=\"_blank\">${member.contact_mobile}</a> <br>
                                           <a href=\"mailto:${member.contact_email}\" target=\"_blank\">${member.contact_email}</a>
                         </p>`,
-                      "https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png", [orgType_hash[member.organization_type]]);
+                      getOrgTypeIcon(member.organization_type), orgType_color[member.organization_type], [orgType_hash[member.organization_type]]);
   }
 
 
